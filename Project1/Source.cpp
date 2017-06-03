@@ -13,8 +13,8 @@ int main(){
 	int joke = 0;
 	UGI(tab);
 	showmenuBook();
-	ReadMyFile(0);
-	ReadMyFile(1);
+	//ReadMyFile(0);
+	//ReadMyFile(1);
 	for (; quit == true;) {
 				
 			if (_kbhit()) {
@@ -66,6 +66,12 @@ int main(){
 					quit = ButtonQuit();
 					break;
 				}
+				case 'f':;
+				case 'F': {
+					 FullClearRow();
+					FullView( tab);
+					break;
+				}
 				case 13: {
 					joke = ButtonReturn(joke);
 					break;
@@ -74,8 +80,8 @@ int main(){
 					cout << " That's not a choice.";
 				}
 				SetConsoleCursorPosition(45, 5);
-				ReadMyFile(1);		  // курсу на парковкy
-				ReadMyFile(0);
+				//ReadMyFile(1);		  // курсу на парковкy
+				//ReadMyFile(0);
 				SetConsoleCursorPosition(2, 42);
 				
 			}	

@@ -58,16 +58,6 @@ void showmenuUser() {
 	SetConsoleCursorPosition(30, 52);
 	cout << "7 - Number of books on hand\t\t\t\t";
 }
-void report() {
-	cout << " It's been an excellent week for business . \n "
-		" Salesareup 120 % . Expensesare down 35 % . \n ";
-}
-
-void comfort() {
-	cout << " Your emp loyees think you are the finest CEO \n "
-		" in the industry . The board of directors think \n "
-		" you are the finest яен in the industr  . \n ";
-}
 
 /////////////////////////////Good
 int ButtonTab(int t)
@@ -265,7 +255,8 @@ void Add(int tab) {																	//add user or book
 	const char * file1 = "User.dat";
 	Book book;
 	User user;
-	
+	char buf[16];
+	int temp;
 
 	if (tab == 0) {
 		ofstream fout(file,
@@ -320,10 +311,30 @@ void Add(int tab) {																	//add user or book
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 
+		//SetConsoleCursorPosition(2, 41);
+		//cout << "Enter Book count:\t\t\t\t\t\n";
+		//ClearRow();
+		//cin >> book.Cou;
+
 		SetConsoleCursorPosition(2, 41);
 		cout << "Enter Book count:\t\t\t\t\t\n";
 		ClearRow();
-		cin >> book.Cou;
+		cin.getline(buf, 8);
+		temp = atoi(buf);
+
+		while (1>temp || temp>9999)
+		{
+
+			SetConsoleCursorPosition(2, 41);
+			cout << "Erorr! Enter an integer between 1 and 9999, inclusive.\t\t\t\n";
+			ClearRow();
+			cin.getline(buf, 5);
+			temp = atoi(buf);
+			
+		}
+		//printf("%04d ", temp);	  //formatt 0000
+		book.Cou = temp;
+
 		eatline();
 
 		cin.clear(0);
@@ -419,11 +430,84 @@ void Add(int tab) {																	//add user or book
 
 
 
-void ClearRow()
-{
-	SetConsoleCursorPosition(2, 42);
-	for (int i = 0; i<90; i++)
-		cout << " ";
-	SetConsoleCursorPosition(2, 42);
+//void ClearRow()
+//{
+//	SetConsoleCursorPosition(2, 42);
+//	for (int i = 0; i<90; i++)
+//		cout << " ";
+//	SetConsoleCursorPosition(2, 42);
+//
+//}
+//
+//void FullClearRow() {
+//	SetConsoleCursorPosition(0, 5);
+//	for (int y = 0; y < 45; y++) {
+//		for (int x = 0; x < 99; x++)
+//			cout << " ";
+//	}
+//	SetConsoleCursorPosition(2, 42);  
+//}
 
-}
+
+//void FullView(int tab) {
+//
+//	const char * file = "Book.dat";
+//	const char * file1 = "User.dat";
+//	Book book;
+//	User user;
+//	if (tab == 0) {
+//		ifstream fin;
+//		fin.open(file, ios_base::in | ios_base::binary);		// binary file
+//																//NOTE: some systems don't accept the ios_base::binary mode
+//		if (fin.is_open()) {
+//			SetConsoleCursorPosition(2, 60);
+//			cout << "Here are the current contents of the book"
+//				<< file << " file:\n";
+//			SetConsoleCursorPosition(0, 5);
+//
+//			while (fin.read((char *)&book, sizeof book)) {
+//
+//				cout << setiosflags(ios::left);					//viravnivanie
+//				cout << char(186) << setw(20) << book.B_name;
+//				cout << '|' << setw(20) << book.Aut;
+//				cout << '|' << setw(11) << book.R_date;
+//				cout << '|' << setw(5) << book.ID_b;
+//				cout << '|' << setw(10) << book.Con;
+//				cout << '|' << setw(4) << book.Cou;
+//				
+//				printf("|%04d", book.Cou);	  //formatt 0000
+//				
+//				cout << '|' << setw(3) << book.Rat ;
+//				cout << '|' << setw(7) << book.ID_b;
+//				cout << '|' << setw(8) << book.ID_U << endl;
+//
+//			
+//			}
+//			fin.close();
+//		}
+//	}
+//	else {
+//		//ifstream fin;
+//		//fin.open(file1, ios_base::in | ios_base::binary);  // binary file
+//		//												   //NOTE: some systems don't accept the ios_base::binary mode
+//		//if (fin.is_open()) {
+//		//	SetConsoleCursorPosition(2, 59);
+//		//	cout << "Here are the current contents of the user "
+//		//		<< file << " file1:\n";
+//		//	int i = 5;
+//		//	SetConsoleCursorPosition(51, 5);
+//		//	while (fin.read((char *)&user, sizeof user)) {
+//
+//		//		SetConsoleCursorPosition(51, i);
+//		//		cout << setiosflags(ios::left);
+//		//		cout << setw(15) << user.U_Name << '|' << setw(10) << user.Hbir << endl;
+//		//		//cout << '|' << setw(11) << user.DateIs;
+//		//		//cout << '|' << setw(11) << user.Pas << endl;
+//		//		i++;
+//		//	}
+//		//	fin.close();
+//		//}
+//	}
+//	
+//	
+//}

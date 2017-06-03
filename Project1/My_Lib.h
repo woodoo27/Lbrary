@@ -42,11 +42,9 @@ int ButtonReturn(int j);
 int ButtonTab(int tab);
 bool ButtonQuit();
 void ClearRow();
-/////////////////////////////////////////////////func unsort
+
+void FullClearRow();
 
 
-void report();		//temp
-void comfort();	 
-
-/////////////////////////////////////////////////func struct
+void FullView(int tab);
 #endif
