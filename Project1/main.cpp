@@ -13,8 +13,8 @@ int main(){
 	int joke = 0;
 	UGI(tab);
 	showmenuBook();
-	//ReadMyFile(0);
-	//ReadMyFile(1);
+	ReadMyFile(0);
+	ReadMyFile(1);
 	for (; quit == true;) {
 				
 			if (_kbhit()) {
@@ -51,15 +51,29 @@ int main(){
 				case 'E': {
 					if (0 == tab) {
 						showmenuBook();
-						Add(tab);
-						
+						Add(tab); 
+						SetConsoleCursorPosition(2, 42);
+						ClearRow();
 					}
 					else { 
 						showmenuUser();
 						Add(tab);
+
+						SetConsoleCursorPosition(2, 42);
+						ClearRow();
 					}
 					break;
+				}
+				case 's':;
+				case 'S': {
+					void TabClearRow();
 
+					ReadMyFile(0);
+					ReadMyFile(1); 
+
+					SetConsoleCursorPosition(2, 42);
+					ClearRow();	 
+					break;
 				}
 				case 'q':;
 				case 'Q': {
@@ -68,9 +82,14 @@ int main(){
 				}
 				case 'f':;
 				case 'F': {
-					 FullClearRow();
-					FullView( tab);
-					break;
+					FullClearRow();
+					FullView(tab);
+					ReadMyFile(0);
+					ReadMyFile(1);
+
+					SetConsoleCursorPosition(2, 42);
+					ClearRow();
+					break;	   
 				}
 				case 13: {
 					joke = ButtonReturn(joke);

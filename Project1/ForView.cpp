@@ -15,16 +15,32 @@ void ClearRow()
 	for (int i = 0; i<90; i++)
 		cout << " ";
 	SetConsoleCursorPosition(2, 42);
-
 }
 
 void FullClearRow() {
 	SetConsoleCursorPosition(0, 5);
-	for (int y = 0; y < 45; y++) {
-		for (int x = 0; x < 99; x++)
-			cout << " ";
+	for (int y = 5; y < 40; y++) {
+		for (int x = 1; x < 99; x++)  {
+			SetConsoleCursorPosition(x, y);
+			cout << " "; 
+			}
 	}
-	SetConsoleCursorPosition(2, 42);
+}
+void TabClearRow() {
+	SetConsoleCursorPosition(0, 5);
+	for (int y = 5; y < 40; y++) {
+		for (int x = 1; x < 99; x++) {
+			
+			if (x == 50) {
+				SetConsoleCursorPosition(x, y);
+				cout << char(179);
+			}
+			else {
+				SetConsoleCursorPosition(x, y);
+				cout << " ";
+			}
+		}
+	}
 }
 
 void FullView(int tab) {
@@ -49,14 +65,14 @@ void FullView(int tab) {
 				cout << char(186) << setw(20) << book.B_name;
 				cout << '|' << setw(20) << book.Aut;
 				cout << '|' << setw(11) << book.R_date;
-				cout << '|' << setw(5) << book.ID_b;
-				cout << '|' << setw(10) << book.Con;
-				cout << '|' << setw(4) << book.Cou;
+				//cout << '|' << setw(5) << book.ID_b;
+				//cout << '|' << setw(10) << book.Con;
+				//cout << '|' << setw(4) << book.Cou;
 
 				printf("|%04d", book.Cou);	  //formatt 0000
 
-				cout << '|' << setw(3) << book.Rat;
-				cout << '|' << setw(7) << book.ID_b;
+				//cout << '|' << setw(3) << book.Rat;
+				//cout << '|' << setw(7) << book.ID_b;
 				cout << '|' << setw(8) << book.ID_U << endl;
 
 

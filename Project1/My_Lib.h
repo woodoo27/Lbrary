@@ -44,7 +44,7 @@ bool ButtonQuit();
 void ClearRow();
 
 void FullClearRow();
-
+void TabClearRow();
 
 void FullView(int tab);
 #endif

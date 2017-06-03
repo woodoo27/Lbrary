@@ -6,8 +6,80 @@
 #include "My_Lib.h"
 
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+ /////////////////////////////   Interface
 void eatline() { while (cin.get() != '\n') continue; };
 
+void UGI(int tab) {
+	SetConsoleTitle("Library V.0.01");
+	SetConsoleWinSizePosition(100, 200, 0, 0);
+	SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE |/* BACKGROUND_INTENSITY |*/
+		FOREGROUND_RED | FOREGROUND_GREEN | /*FOREGROUND_BLUE |*/ FOREGROUND_INTENSITY);
+	for (int i = 0; i < 55; i++) {
+		for (int j = 0; j <= 100; j++) {
+			cout << " ";
+		}
+	}
+	//Table line	
+	SetConsoleCursorPosition(0, 0);
+	cout << char(201);	 //up
+	for (int i = 1; i<100; i++)
+		cout << char(205);
+	cout << char(187);
+	SetConsoleCursorPosition(0, 2); //1 line ------------
+	for (int i = 1; i <= 100; i++)
+		cout << char(196);
+	SetConsoleCursorPosition(0, 4); //2 line ------------
+	for (int i = 1; i <= 100; i++)
+		cout << char(196);
+	SetConsoleCursorPosition(0, 40); //3 line ------------
+	for (int i = 1; i <= 100; i++)
+		cout << char(196);
+	
+		for (int i = 3; i < 40; i++) {
+			SetConsoleCursorPosition(50, i);
+			cout << char(179) << "\n";
+		
+	}
+
+	SetConsoleCursorPosition(50, 2);   //cross left
+	cout << char(194) << "\n";
+	SetConsoleCursorPosition(50, 4);  //   cross centr
+	cout << char(197) << "\n";
+	SetConsoleCursorPosition(50, 40);   	//   cross right
+	cout << char(193) << "\n";
+
+
+	for (int i = 1; i < 43; i++) {	 //left and rihgt
+		SetConsoleCursorPosition(0, i);
+		cout << char(186);
+		SetConsoleCursorPosition(100, i);
+		cout << char(186);
+	}
+	cout << char(200);	 //down
+	for (int i = 1; i<100; i++)
+		cout << char(205);
+	cout << char(188);
+	if (0 == tab)
+		showmenuBook();
+	else
+		showmenuUser();
+	SetConsoleCursorPosition(5, 1);
+	cout << "LIBRARY : ";
+	SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_INTENSITY |
+		FOREGROUND_RED | FOREGROUND_GREEN | /*FOREGROUND_BLUE |*/ FOREGROUND_INTENSITY);
+	SetConsoleCursorPosition(1, 3);
+	cout << "Book : 1";
+	SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE |/* BACKGROUND_INTENSITY |*/
+		FOREGROUND_RED | FOREGROUND_GREEN | /*FOREGROUND_BLUE |*/ FOREGROUND_INTENSITY);
+	SetConsoleCursorPosition(51, 3);
+	cout << "Member: 2";
+	showmenu();
+	SetConsoleCursorPosition(30, 45);
+	cout << "OPTIONAL";
+
+
+}
 
 void showmenu() {
 	SetConsoleCursorPosition(0, 45);
@@ -22,6 +94,7 @@ void showmenu() {
 	cout << "E - Edit\n";
 
 }
+
 void showmenuBook() {
 	SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE |/* BACKGROUND_INTENSITY |*/
 		FOREGROUND_RED | FOREGROUND_GREEN | /*FOREGROUND_BLUE |*/ FOREGROUND_INTENSITY);
@@ -40,6 +113,7 @@ void showmenuBook() {
 	SetConsoleCursorPosition(30, 52);
 	cout << "7 - Edit ID Book\t\t\t\t";
 }
+
 void showmenuUser() {
 	SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE |/* BACKGROUND_INTENSITY |*/
 		FOREGROUND_RED | FOREGROUND_GREEN | /*FOREGROUND_BLUE |*/ FOREGROUND_INTENSITY);
@@ -90,7 +164,6 @@ int ButtonTab(int t)
 	}
 	return t;
 }
-///////////////////////////////////////////
 
 bool ButtonQuit() {
 	cout << "q - key to quit" << endl;
@@ -99,6 +172,7 @@ bool ButtonQuit() {
 		return false;
 	return true;
 }
+
 int ButtonReturn(int j) {
 	j++;
 	if (10 == j) {
@@ -107,6 +181,10 @@ int ButtonReturn(int j) {
 	}
 	return j;
 }
+
+///////////////////////////////////////////
+
+//////////////////////console
 
 void SetConsoleWinSizePosition(int width = 0, int heigth = 0, short x_position = 0, short y_position = 0) {
 	HWND hWnd = GetForegroundWindow();
@@ -122,84 +200,12 @@ void SetConsoleWinSizePosition(int width = 0, int heigth = 0, short x_position =
 	SetConsoleScreenBufferSize(wHnd, bufferSize);
 }
 
-
-
 void SetConsoleCursorPosition(short x_position, short y_position) {
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	COORD _coordPosition = { x_position , y_position };
 	SetConsoleCursorPosition(hConsole, _coordPosition);
 }
 
-
-void UGI(int tab) {
-	SetConsoleTitle("Library V.0.01");
-	SetConsoleWinSizePosition(100, 200, 0, 0);
-	SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE |/* BACKGROUND_INTENSITY |*/
-		FOREGROUND_RED | FOREGROUND_GREEN | /*FOREGROUND_BLUE |*/ FOREGROUND_INTENSITY);
-	for (int i = 0; i < 55; i++) {
-		for (int j = 0; j <= 100; j++) {
-			cout << " ";
-		}
-	}
-	//Table line	
-	SetConsoleCursorPosition(0, 0);
-	cout << char(201);	 //up
-	for (int i = 1; i<100; i++)
-		cout << char(205);
-	cout << char(187);
-	SetConsoleCursorPosition(0, 2); //1 line ------------
-	for (int i = 1; i <= 100; i++)
-		cout << char(196);
-	SetConsoleCursorPosition(0, 4); //2 line ------------
-	for (int i = 1; i <= 100; i++)
-		cout << char(196);
-	SetConsoleCursorPosition(0, 40); //3 line ------------
-	for (int i = 1; i <= 100; i++)
-		cout << char(196);
-
-	for (int i = 3; i < 40; i++) {
-		SetConsoleCursorPosition(50, i);
-		cout << char(179) << "\n";
-	}
-
-	SetConsoleCursorPosition(50, 2);   //cross left
-	cout << char(194) << "\n";
-	SetConsoleCursorPosition(50, 4);  //   cross centr
-	cout << char(197) << "\n";
-	SetConsoleCursorPosition(50, 40);   	//   cross right
-	cout << char(193) << "\n";
-
-
-	for (int i = 1; i < 43; i++) {	 //left and rihgt
-		SetConsoleCursorPosition(0, i);
-		cout << char(186);
-		SetConsoleCursorPosition(100, i);
-		cout << char(186);
-	}
-	cout << char(200);	 //down
-	for (int i = 1; i<100; i++)
-		cout << char(205);
-	cout << char(188);
-	if (0 == tab)
-		showmenuBook();
-	else
-		showmenuUser();
-	SetConsoleCursorPosition(5, 1);
-	cout << "LIBRARY : ";
-	SetConsoleTextAttribute(hConsole, BACKGROUND_RED | BACKGROUND_INTENSITY |
-		FOREGROUND_RED | FOREGROUND_GREEN | /*FOREGROUND_BLUE |*/ FOREGROUND_INTENSITY);
-	SetConsoleCursorPosition(1, 3);
-	cout << "Book : 1";
-	SetConsoleTextAttribute(hConsole, BACKGROUND_BLUE |/* BACKGROUND_INTENSITY |*/
-		FOREGROUND_RED | FOREGROUND_GREEN | /*FOREGROUND_BLUE |*/ FOREGROUND_INTENSITY);
-	SetConsoleCursorPosition(51, 3);
-	cout << "Member: 2";
-	showmenu();
-	SetConsoleCursorPosition(30, 45);
-	cout << "OPTIONAL";
-
-
-}
 void ReadMyFile(int tab) {
 	const char * file = "Book.dat";
 	const char * file1 = "User.dat";
@@ -249,7 +255,6 @@ void ReadMyFile(int tab) {
 	}
 }
 
-
 void Add(int tab) {																	//add user or book
 	const char * file = "Book.dat";
 	const char * file1 = "User.dat";
@@ -277,7 +282,11 @@ void Add(int tab) {																	//add user or book
 		cin.get(book.B_name, 30);
 		if (book.B_name[0] != '\0')
 			eatline();
-
+		else {
+			SetConsoleCursorPosition(2, 41);
+			cout << "\t\t\t\t\t\t\t\t\t\t\t\n";
+			return;	
+		}
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 
@@ -311,10 +320,6 @@ void Add(int tab) {																	//add user or book
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 
-		//SetConsoleCursorPosition(2, 41);
-		//cout << "Enter Book count:\t\t\t\t\t\n";
-		//ClearRow();
-		//cin >> book.Cou;
 
 		SetConsoleCursorPosition(2, 41);
 		cout << "Enter Book count:\t\t\t\t\t\n";
@@ -322,17 +327,16 @@ void Add(int tab) {																	//add user or book
 		cin.getline(buf, 8);
 		temp = atoi(buf);
 
-		while (1>temp || temp>9999)
+		while (1>temp || temp>11)
 		{
 
 			SetConsoleCursorPosition(2, 41);
-			cout << "Erorr! Enter an integer between 1 and 9999, inclusive.\t\t\t\n";
+			cout << "Erorr! Enter an integer between 1 and 10, inclusive:\t\t\t\n";
 			ClearRow();
 			cin.getline(buf, 5);
 			temp = atoi(buf);
 			
 		}
-		//printf("%04d ", temp);	  //formatt 0000
 		book.Cou = temp;
 
 		eatline();
@@ -343,7 +347,20 @@ void Add(int tab) {																	//add user or book
 		SetConsoleCursorPosition(2, 41);
 		cout << "Enter Book rate:\t\t\t\t\t\n";
 		ClearRow();
-		cin >> book.Rat;
+		cin.getline(buf, 8);
+		temp = atoi(buf);
+
+		while (0>temp || temp>11)
+		{
+
+			SetConsoleCursorPosition(2, 41);
+			cout << "Erorr! Enter an integer between 0 and 5, inclusive.\t\t\t\n";
+			ClearRow();
+			cin.getline(buf,5);
+			temp = atoi(buf);
+
+		}
+		book.Rat = temp;
 		eatline();
 
 		cin.clear(0);
@@ -382,6 +399,11 @@ void Add(int tab) {																	//add user or book
 		cin.get(user.U_Name, 30);
 		if (user.U_Name[0] != '\0')
 			eatline();
+		else {
+			SetConsoleCursorPosition(2, 41);
+			cout << "\t\t\t\t\t\t\t\t\t\t\t\n";
+			return;
+		}
 
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
@@ -430,84 +452,3 @@ void Add(int tab) {																	//add user or book
 
 
 
-//void ClearRow()
-//{
-//	SetConsoleCursorPosition(2, 42);
-//	for (int i = 0; i<90; i++)
-//		cout << " ";
-//	SetConsoleCursorPosition(2, 42);
-//
-//}
-//
-//void FullClearRow() {
-//	SetConsoleCursorPosition(0, 5);
-//	for (int y = 0; y < 45; y++) {
-//		for (int x = 0; x < 99; x++)
-//			cout << " ";
-//	}
-//	SetConsoleCursorPosition(2, 42);  
-//}
-
-
-//void FullView(int tab) {
-//
-//	const char * file = "Book.dat";
-//	const char * file1 = "User.dat";
-//	Book book;
-//	User user;
-//	if (tab == 0) {
-//		ifstream fin;
-//		fin.open(file, ios_base::in | ios_base::binary);		// binary file
-//																//NOTE: some systems don't accept the ios_base::binary mode
-//		if (fin.is_open()) {
-//			SetConsoleCursorPosition(2, 60);
-//			cout << "Here are the current contents of the book"
-//				<< file << " file:\n";
-//			SetConsoleCursorPosition(0, 5);
-//
-//			while (fin.read((char *)&book, sizeof book)) {
-//
-//				cout << setiosflags(ios::left);					//viravnivanie
-//				cout << char(186) << setw(20) << book.B_name;
-//				cout << '|' << setw(20) << book.Aut;
-//				cout << '|' << setw(11) << book.R_date;
-//				cout << '|' << setw(5) << book.ID_b;
-//				cout << '|' << setw(10) << book.Con;
-//				cout << '|' << setw(4) << book.Cou;
-//				
-//				printf("|%04d", book.Cou);	  //formatt 0000
-//				
-//				cout << '|' << setw(3) << book.Rat ;
-//				cout << '|' << setw(7) << book.ID_b;
-//				cout << '|' << setw(8) << book.ID_U << endl;
-//
-//			
-//			}
-//			fin.close();
-//		}
-//	}
-//	else {
-//		//ifstream fin;
-//		//fin.open(file1, ios_base::in | ios_base::binary);  // binary file
-//		//												   //NOTE: some systems don't accept the ios_base::binary mode
-//		//if (fin.is_open()) {
-//		//	SetConsoleCursorPosition(2, 59);
-//		//	cout << "Here are the current contents of the user "
-//		//		<< file << " file1:\n";
-//		//	int i = 5;
-//		//	SetConsoleCursorPosition(51, 5);
-//		//	while (fin.read((char *)&user, sizeof user)) {
-//
-//		//		SetConsoleCursorPosition(51, i);
-//		//		cout << setiosflags(ios::left);
-//		//		cout << setw(15) << user.U_Name << '|' << setw(10) << user.Hbir << endl;
-//		//		//cout << '|' << setw(11) << user.DateIs;
-//		//		//cout << '|' << setw(11) << user.Pas << endl;
-//		//		i++;
-//		//	}
-//		//	fin.close();
-//		//}
-//	}
-//	
-//	
-//}
