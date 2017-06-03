@@ -62,18 +62,18 @@ void FullView(int tab) {
 			while (fin.read((char *)&book, sizeof book)) {
 
 				cout << setiosflags(ios::left);					//viravnivanie
-				cout << char(186) << setw(20) << book.B_name;
-				cout << '|' << setw(20) << book.Aut;
-				cout << '|' << setw(11) << book.R_date;
-				//cout << '|' << setw(5) << book.ID_b;
+				cout << char(186) << setw(25) << book.B_name;
+				cout << '|' << setw(25) << book.Aut;
+				cout << '|' << setw(10) << book.R_date;
+				cout << '|' << setw(6) << book.ID_b;
 				//cout << '|' << setw(10) << book.Con;
 				//cout << '|' << setw(4) << book.Cou;
 
 				printf("|%04d", book.Cou);	  //formatt 0000
 
-				//cout << '|' << setw(3) << book.Rat;
-				//cout << '|' << setw(7) << book.ID_b;
-				cout << '|' << setw(8) << book.ID_U << endl;
+				//cout << '|' << setw(2) << book.Rat;
+				cout << '|' << setw(6) << book.ID_b;
+				//cout << '|' << setw(8) << book.ID_U << endl;
 
 
 			}

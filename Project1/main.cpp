@@ -80,12 +80,18 @@ int main(){
 					quit = ButtonQuit();
 					break;
 				}
+				case 't':;
+				case 'T': {
+					SetConsoleCursorPosition(2, 5);
+					
+					break;
+				}
 				case 'f':;
 				case 'F': {
-					FullClearRow();
+					
 					FullView(tab);
 					ReadMyFile(0);
-					ReadMyFile(1);
+					
 
 					SetConsoleCursorPosition(2, 42);
 					ClearRow();
