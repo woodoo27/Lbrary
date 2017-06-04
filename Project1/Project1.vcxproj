@@ -115,6 +115,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ForView.cpp" />
+    <ClCompile Include="IOFunc.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Func.cpp" />
   </ItemGroup>

@@ -24,6 +24,9 @@
     <ClCompile Include="ForView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="IOFunc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="My_Lib.h">

@@ -31,8 +31,8 @@ void SetConsoleWinSizePosition(int width, int heigth, short x_position, short y_
 void SetConsoleCursorPosition(short x_position, short y_position);
 
 /////////////////////////////////////////////////func file
-void ReadMyFile(int tab);
-void Add(int tab);
+void ReadMyFile(int tab,string filename);
+void Add(int tab,string filename);
 /////////////////////////////////////////////////func menu & button
 void showmenu();
 void showmenuBook();
@@ -41,10 +41,37 @@ void UGI(int tab);
 int ButtonReturn(int j);
 int ButtonTab(int tab);
 bool ButtonQuit();
-void ClearRow();
 
-void FullClearRow();
+
+
+
+/////for delete
 void TabClearRow();
+void ClearRow();
+void FullView(int tab);	
 
-void FullView(int tab);
+
+
+
+ ////////////////////Final
+void OpenFile(string filenamen, int tab);				 
+string Filename(int tab);
+
+
+
+
+void FullClearRow(int y);
+
+
+
+
+
+
+
+
+
+
+void SaveFile();
+void SaveFile1();
+
 #endif

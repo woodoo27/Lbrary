@@ -2,6 +2,7 @@
 #include  <fstream>
 #include <iomanip>
 #include <Windows.h>
+#include <string>
 #include <conio.h>	 //console
 #include "My_Lib.h"
 
@@ -206,9 +207,12 @@ void SetConsoleCursorPosition(short x_position, short y_position) {
 	SetConsoleCursorPosition(hConsole, _coordPosition);
 }
 
-void ReadMyFile(int tab) {
-	const char * file = "Book.dat";
-	const char * file1 = "User.dat";
+void ReadMyFile(int tab, string filename) {
+	//const char * file = "Book.dat";
+	//const char * file1 = "User.dat";
+
+	string file = filename;
+	
 	Book book;
 	User user;
 	if (tab == 0) {
@@ -233,7 +237,7 @@ void ReadMyFile(int tab) {
 	}
 	else {
 		ifstream fin;
-		fin.open(file1, ios_base::in | ios_base::binary);  // binary file
+		fin.open(file, ios_base::in | ios_base::binary);  // binary file
 														   //NOTE: some systems don't accept the ios_base::binary mode
 		if (fin.is_open()) {
 			SetConsoleCursorPosition(2, 59);
@@ -255,9 +259,10 @@ void ReadMyFile(int tab) {
 	}
 }
 
-void Add(int tab) {																	//add user or book
-	const char * file = "Book.dat";
-	const char * file1 = "User.dat";
+void Add(int tab,string filename) {																	//add user or book
+	//const char * file = "Book.dat";
+	//const char * file1 = "User.dat";
+	string file = filename;
 	Book book;
 	User user;
 	char buf[16];
@@ -381,7 +386,7 @@ void Add(int tab) {																	//add user or book
 	}
 	
 	else {
-		ofstream fout(file1,
+		ofstream fout(file,
 			ios_base::out | ios_base::app | ios_base::binary);
 		//NOTE: some systems don't accept the ios::binary mode
 		if (!fout.is_open())

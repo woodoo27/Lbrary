@@ -5,29 +5,35 @@
 #include <conio.h>	 //console
 #include "My_Lib.h"
 
+ //////////////////////////good
+
+
+void FullClearRow(int y) {														//clear row ->y
+	
+	SetConsoleCursorPosition(2, y);
+	for (int i = 0; i<98; i++)
+		cout << " ";
+}
 
 
 
 
+
+
+
+
+
+////////////////////////////////////uncnoun func
 void ClearRow()
 {
 	SetConsoleCursorPosition(2, 42);
 	for (int i = 0; i<90; i++)
 		cout << " ";
 	SetConsoleCursorPosition(2, 42);
-}
+}		
 
-void FullClearRow() {
-	SetConsoleCursorPosition(0, 5);
-	for (int y = 5; y < 40; y++) {
-		for (int x = 1; x < 99; x++)  {
-			SetConsoleCursorPosition(x, y);
-			cout << " "; 
-			}
-	}
-}
 void TabClearRow() {
-	SetConsoleCursorPosition(0, 5);
+SetConsoleCursorPosition(0, 5);
 	for (int y = 5; y < 40; y++) {
 		for (int x = 1; x < 99; x++) {
 			
@@ -42,7 +48,7 @@ void TabClearRow() {
 		}
 	}
 }
-
+//////////////////////////////////Delete
 void FullView(int tab) {
 
 	const char * file = "Book.dat";
@@ -50,18 +56,20 @@ void FullView(int tab) {
 	Book book;
 	User user;
 	if (tab == 0) {
-		ifstream fin;
-		fin.open(file, ios_base::in | ios_base::binary);		// binary file
-																//NOTE: some systems don't accept the ios_base::binary mode
-		if (fin.is_open()) {
-			SetConsoleCursorPosition(2, 60);
-			cout << "Here are the current contents of the book"
-				<< file << " file:\n";
-			SetConsoleCursorPosition(0, 5);
+		//ifstream fin;
+		//fin.open(file, ios_base::in | ios_base::binary);		// binary file
+		//														//NOTE: some systems don't accept the ios_base::binary mode
+		//if (fin.is_open()) {
+		//	SetConsoleCursorPosition(2, 60);
+		//	cout << "Here are the current contents of the book"
+		//		<< file << " file:\n";
+		//	SetConsoleCursorPosition(0, 5);
 
-			while (fin.read((char *)&book, sizeof book)) {
+		//	while (fin.read((char *)&book, sizeof book)) {
 
-				cout << setiosflags(ios::left);					//viravnivanie
+				//cout << setiosflags(ios::left);					//viravnivanie
+	
+			SetConsoleCursorPosition(2, 30);
 				cout << char(186) << setw(25) << book.B_name;
 				cout << '|' << setw(25) << book.Aut;
 				cout << '|' << setw(10) << book.R_date;
@@ -77,10 +85,10 @@ void FullView(int tab) {
 
 
 			}
-			fin.close();
-		}
-	}
-	else {
+		//	fin.close();
+		//}
+	//}
+	//else {
 		//ifstream fin;
 		//fin.open(file1, ios_base::in | ios_base::binary);  // binary file
 		//												   //NOTE: some systems don't accept the ios_base::binary mode
@@ -101,7 +109,7 @@ void FullView(int tab) {
 		//	}
 		//	fin.close();
 		//}
-	}
+	//}
 
 
 }
