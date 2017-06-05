@@ -37,7 +37,7 @@ void ClearRow()																//clear info roow
 
 
 //////////////////////////////////edit func
-void FullView(int tab) {
+void FullMode(int tab) {
 
 	const char * file = "Book.dat";
 	const char * file1 = "User.dat";

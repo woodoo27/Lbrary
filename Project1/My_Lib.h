@@ -33,7 +33,11 @@ void SetConsoleCursorPosition(short x_position, short y_position);
 /////////////////////////////////////////////////func file
 void ReadMyFile(int tab,string filename);
 void Add(int tab,string filename);	
-string Filename(int tab, string filename);
+string Filename(int tab, string filename);		   
+void FullMode(int tab);							  //not work
+
+void RandomLineEdit(int tab, string filename);
+
 /////////////////////////////////////////////////func menu & button
 void showmenu();
 void showmenuBook();
@@ -43,26 +47,19 @@ int ButtonReturn(int j);
 int ButtonTab(int tab);
 bool ButtonQuit();
 
-
-
-
-/////for delete
-void TabClearRow();
-void ClearRow();
-void FullView(int tab);	
-
-
-
-
- ////////////////////Final
-//void OpenFile(string filenamen, int tab);				 
-
-
-
-
-
+//////////////////////////////////////////////for clear
 void FullClearRow(int y);
 void BookClearRow();
+void ClearRow();
+
+
+
+ 
+
+
+
+
+
 
 
 

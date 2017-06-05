@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <Windows.h>
 #include <string>
+#include <cstdlib> 
 #include <conio.h>	 //console
 #include "My_Lib.h"
 
@@ -26,9 +27,9 @@ void ReadMyFile(int tab, string filename) {
 	int y = 0;
 	Book book;
 	User user;
-
+	int nrow = 0;
 	
-	BookClearRow();
+	
 
 	//for (int i = 5; i < 35; i++) {
 	//	SetConsoleCursorPosition(1, i);
@@ -48,12 +49,12 @@ void ReadMyFile(int tab, string filename) {
 			while (fin.read((char *)&book, sizeof book)) {
 			 	 
 				cout << setiosflags(ios::left);					//viravnivanie
-				cout << char(186) << setw(20) << book.B_name;
+				cout << char(186)<<nrow++<<":" << setw(20) << book.B_name;
 				cout << '|'  << setw(5) << book.ID_b;
 				cout << '|'  << setw(3) << book.Cou << endl;
 				str++;
 				y++;
-			}  
+			} nrow = 0;
 			 fin.close();
 			 
 			
@@ -74,11 +75,11 @@ void ReadMyFile(int tab, string filename) {
 
 				SetConsoleCursorPosition(51, i);
 				cout << setiosflags(ios::left);
-				cout << setw(15) << user.U_Name << '|' << setw(10) << user.Hbir << endl;
+				cout << nrow++ << ":" <<setw(15) << user.U_Name << '|' << setw(10) << user.Hbir << endl;
 				//cout << '|' << setw(11) << user.DateIs;
 				//cout << '|' << setw(11) << user.Pas << endl;
 				i++;
-			}
+			}  nrow = 0;
 			fin.close();
 		}
 	}
@@ -280,93 +281,364 @@ void Add(int tab, string filename) {																	//add user or book
 	cin.ignore(cin.rdbuf()->in_avail());
 }
 
-void SaveFile() {			   ///not work corect  !!!!!!!!!!!!!!!!!!!
-	const char * file = "Book.dat";
-	const char * file1 = "User.dat";
+/////////////////////////////////////////////Random line edit book or user
+void RandomLineEdit(int tab, string filename) {								  //not work user block
+	string file = filename;
 	Book book;
 	User user;
+	char buf[16];
+	int ct = 0;
+	long rec;
+	int temp;
 
-		ofstream fout_B(file,
-			ios_base::out | ios_base::app | ios_base::binary);			//NOTE: some systems don't accept the ios::binary mode
-		if (!fout_B.is_open())
-		{
-			//ClearRow();
-			//SetConsoleCursorPosition(2, 41);
-			FullClearRow(41);
-			SetConsoleCursorPosition(2, 41);
-			cerr << "Can't open " << file << " file for output:"<<endl;
-			exit(EXIT_FAILURE);
+	fstream finout;     // read and write streams
+	finout.open(filename,
+		ios_base::in | ios_base::out | ios_base::binary);
+	//NOTE: Some Unix systems require omitting | ios::binary
+
+	if (finout.is_open()) {
+		finout.seekg(0);    // go to beginning
+							//cout << "Here are the current contents of the "
+							//	<< file1 << " file1:\n";
+
+		if (tab == 0) {
+			while (finout.read((char *)&book, sizeof book))
+				ct++;
 		}
-
-		fout_B.write((char *)&book, sizeof book);
-
-		//ClearRow();
-		//SetConsoleCursorPosition(2, 41);
-		FullClearRow(41);
-		SetConsoleCursorPosition(2, 41);
-		cout << "Save->" << file << endl;
-		fout_B.close();
-
-		ofstream fout_U(file1,
-			ios_base::out | ios_base::app | ios_base::binary);
-		//NOTE: some systems don't accept the ios::binary mode
-		if (!fout_U.is_open())
-		{
-			//ClearRow();
-			//SetConsoleCursorPosition(2, 42);
-			FullClearRow(42);
-			SetConsoleCursorPosition(2, 42);
-			cerr << "Can't open ->" << file1 << " file for output:"<<endl;
-			exit(EXIT_FAILURE);
-		}
-
-
-		fout_U.write((char *)&user, sizeof user);
-
-		//ClearRow();
-		//SetConsoleCursorPosition(2, 42);
-		FullClearRow(42);
-		SetConsoleCursorPosition(2, 42);
-		cout << "Save->" << file1 << endl;
-
-		fout_U.close();
-
-}
-void SaveFile1() {
-	const char * file = "Book.dat";
-	const char * file1 = "User.dat";
-	Book book;
-	User user;
-
-	ofstream fout_B(file,
-		ios_base::out | ios_base::app | ios_base::binary);			//NOTE: some systems don't accept the ios::binary mode
-	if (!fout_B.is_open())
-	{
 		
-		cerr << "Can't open " << file << " file for output:" << endl;
-		exit(EXIT_FAILURE);
+		else {
+			while (finout.read((char *)&user, sizeof user))
+				ct++;
+		}
+		//temp checpoint
+		//ClearRow();
+		//cout << "count row"<<ct;
+		//return;
+
+		if (finout.eof())
+			finout.clear(); // clear eof flag
+		else {
+			ClearRow();
+			cerr << "Error in reading " << filename << ".\n";
+			return;
+		}
 	}
-
-	fout_B.write((char *)&book, sizeof book);
-	fout_B.close();
-
-	ofstream fout_U(file1,
-		ios_base::out | ios_base::app | ios_base::binary);
-	//NOTE: some systems don't accept the ios::binary mode
-	if (!fout_U.is_open())
+	else
 	{
-		FullClearRow(42);
-		SetConsoleCursorPosition(2, 42);
-		cerr << "Can't open ->" << file1 << " file for output:" << endl;
-		exit(EXIT_FAILURE);
+		ClearRow();
+		cerr << filename << " could not be opened -- bye.\n";
+		return;
 	}
 
 
-	fout_U.write((char *)&user, sizeof user);
+	ClearRow();
+	cout << "Enter the record number you wish to change: ";
+	cin.clear(0);
+	cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
+	cin >> rec;
 
-	fout_U.close();
+	eatline();                                      // get rid of newline		
 
+
+	if (rec < 0 || rec >= ct) {
+		ClearRow();
+		cerr << "Invalid record number n";
+		return;
+	}
+	if (tab == 0) {	   // convert to streampos type
+		streampos place = rec * sizeof book;
+		finout.seekg(place);
+		finout.read((char *)&book, sizeof book);
+		ClearRow();
+		cout << "Your selection:\n";
+														  //readfile
+		cout << rec << ": " << setw(20) << book.B_name << ": "
+			<< setprecision(0) << setw(12) << book.Aut
+			<< setprecision(2) << setw(6) << book.Con << endl;
+
+		if (finout.eof())
+			finout.clear();
+
+		cin.clear(0);
+		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
+
+		SetConsoleCursorPosition(2, 41);
+		cout << "Enter book name (enter a blank line to quit):\t\t\t\t\t\n";
+		ClearRow();
+		cin.get(book.B_name, 30);
+		if (book.B_name[0] != '\0')
+			eatline();
+		else {
+			SetConsoleCursorPosition(2, 41);
+			cout << "\t\t\t\t\t\t\t\t\t\t\t\n";
+			return;
+		}
+		cin.clear(0);
+		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
+
+		SetConsoleCursorPosition(2, 41);
+		cout << "Enter Author Name ->Format Name Surname Patronymic:\t\t\t\t\t\n";
+		ClearRow();
+		cin.get(book.Aut, 100);
+		if (book.Aut[0] != '\0')
+			eatline();
+
+		cin.clear(0);
+		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
+
+		SetConsoleCursorPosition(2, 41);
+		cout << "Enter Release date ->Format dd.mm.yyyy:\t\t\t\t\t\n";
+		ClearRow();
+		cin.get(book.R_date, 11);
+		if (book.R_date[0] != '\0')
+			eatline();
+
+		cin.clear(0);
+		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
+
+		SetConsoleCursorPosition(2, 41);
+		cout << "Enter Book context:\t\t\t\t\t\n";
+		ClearRow();
+		cin.get(book.Con, 30);
+		if (book.Con[0] != '\0')
+			eatline();
+
+		cin.clear(0);
+		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
+
+
+		SetConsoleCursorPosition(2, 41);
+		cout << "Enter Book count:\t\t\t\t\t\n";
+		ClearRow();
+		cin.getline(buf, 8);
+		temp = atoi(buf);
+
+		while (1 > temp || temp > 11) {
+
+			SetConsoleCursorPosition(2, 41);
+			cout << "Erorr! Enter an integer between 1 and 10, inclusive:\t\t\t\n";
+			ClearRow();
+			cin.getline(buf, 5);
+			temp = atoi(buf);
+
+		}
+		book.Cou = temp;
+
+		eatline();
+
+		cin.clear(0);
+		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
+
+		SetConsoleCursorPosition(2, 41);
+		cout << "Enter Book rate:\t\t\t\t\t\n";
+		ClearRow();
+		cin.getline(buf, 8);
+		temp = atoi(buf);
+
+		while (0 > temp || temp > 11) {
+			SetConsoleCursorPosition(2, 41);
+			cout << "Erorr! Enter an integer between 0 and 5, inclusive.\t\t\t\n";
+			ClearRow();
+			cin.getline(buf, 5);
+			temp = atoi(buf);
+		}
+
+		book.Rat = temp;
+		eatline();
+
+		cin.clear(0);
+		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
+
+		SetConsoleCursorPosition(2, 41);
+		cout << "Enter Book ID:\t\t\t\t\t\n";
+		ClearRow();
+		cin >> book.ID_b;
+		eatline();
+
+		cin.clear(0);
+		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
+
+
+		finout.read((char *)&user, sizeof user);
+		SetConsoleCursorPosition(2, 55);
+		cout << "Your selection:\n";
+		cout << rec << ": " << setw(20) << user.U_Name << ": "
+			<< setprecision(0) << setw(12) << user.Hbir
+			<< setprecision(2) << setw(6) << user.DateIs << endl;
+		///////////////temp zamena na readFile	???? info line
+
+
+
+		if (finout.eof())
+			finout.clear();     // clear eof flag
+		finout.seekp(place);    // go back
+		finout.write((char *)&book, sizeof book) << flush;
+		if (finout.fail()) {
+			cerr << "Error on attempted write\n";
+			return;
+		}
+	}
+	else {			// convert to streampos type
+
+		streampos place1 = rec * sizeof user;
+		finout.seekg(place1);
+
+		// random access
+		if (finout.fail()) {
+			cerr << "Error on attempted seek\n";
+			return;
+		}
+
+		///////////////////temp
+
+		SetConsoleCursorPosition(2, 41);
+		cout << "Enter Member name (enter a blank line to quit):\t\t\t\t\t\n";
+		ClearRow();
+		cin.get(user.U_Name, 30);
+		if (user.U_Name[0] != '\0')
+			eatline();
+		else {
+			SetConsoleCursorPosition(2, 41);
+			cout << "\t\t\t\t\t\t\t\t\t\t\t\n";
+			return;
+		}
+
+		cin.clear(0);
+		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
+
+		SetConsoleCursorPosition(2, 41);
+		cout << "Enter birthday user  format (enter a blank line to quit):\t\t\t\n";
+		ClearRow();
+		cin.get(user.Hbir, 11);
+		if (user.Hbir[0] != '\0')
+			eatline();
+
+		cin.clear(0);
+		cin.ignore(cin.rdbuf()->in_avail());
+
+		SetConsoleCursorPosition(2, 41);
+		cout << "Enter Date of issue  format dd.mm.yyyy (enter a blank line to quit):\t\t\t\n";
+		ClearRow();
+		cin.get(user.DateIs, 11);
+		if (user.DateIs[0] != '\0')
+			eatline();
+
+		cin.clear(0);
+		cin.ignore(cin.rdbuf()->in_avail());
+
+		SetConsoleCursorPosition(2, 41);
+		cout << "Enter ID-user format 0000 (enter a blank line to quit):\t\t\t\n";
+		ClearRow();
+		cin.get(user.ID_vs_ID, 5);
+		if (user.ID_vs_ID[0] != '\0')
+			eatline();
+
+		cin.clear(0);
+		cin.ignore(cin.rdbuf()->in_avail());
+
+		finout.seekp(place1);    // go back
+		finout.write((char *)&book, sizeof book) << flush;
+
+		if (finout.fail()) {
+			cerr << "Error on attempted write\n";
+			return;
+		}
+	}
+	finout.close();
+	cin.clear(0);
+	cin.ignore(cin.rdbuf()->in_avail());
+	cout << "Done.\n";
 }
+	
+
+
+//void SaveFile() {			   ///not work corect  !!!!!!!!!!!!!!!!!!!
+//	const char * file = "Book.dat";
+//	const char * file1 = "User.dat";
+//	Book book;
+//	User user;
+//
+//		ofstream fout_B(file,
+//			ios_base::out | ios_base::app | ios_base::binary);			//NOTE: some systems don't accept the ios::binary mode
+//		if (!fout_B.is_open())
+//		{
+//			//ClearRow();
+//			//SetConsoleCursorPosition(2, 41);
+//			FullClearRow(41);
+//			SetConsoleCursorPosition(2, 41);
+//			cerr << "Can't open " << file << " file for output:"<<endl;
+//			exit(EXIT_FAILURE);
+//		}
+//
+//		fout_B.write((char *)&book, sizeof book);
+//
+//		//ClearRow();
+//		//SetConsoleCursorPosition(2, 41);
+//		FullClearRow(41);
+//		SetConsoleCursorPosition(2, 41);
+//		cout << "Save->" << file << endl;
+//		fout_B.close();
+//
+//		ofstream fout_U(file1,
+//			ios_base::out | ios_base::app | ios_base::binary);
+//		//NOTE: some systems don't accept the ios::binary mode
+//		if (!fout_U.is_open())
+//		{
+//			//ClearRow();
+//			//SetConsoleCursorPosition(2, 42);
+//			FullClearRow(42);
+//			SetConsoleCursorPosition(2, 42);
+//			cerr << "Can't open ->" << file1 << " file for output:"<<endl;
+//			exit(EXIT_FAILURE);
+//		}
+//
+//
+//		fout_U.write((char *)&user, sizeof user);
+//
+//		//ClearRow();
+//		//SetConsoleCursorPosition(2, 42);
+//		FullClearRow(42);
+//		SetConsoleCursorPosition(2, 42);
+//		cout << "Save->" << file1 << endl;
+//
+//		fout_U.close();
+//
+//}
+//void SaveFile1() {
+//	const char * file = "Book.dat";
+//	const char * file1 = "User.dat";
+//	Book book;
+//	User user;
+//
+//	ofstream fout_B(file,
+//		ios_base::out | ios_base::app | ios_base::binary);			//NOTE: some systems don't accept the ios::binary mode
+//	if (!fout_B.is_open())
+//	{
+//		
+//		cerr << "Can't open " << file << " file for output:" << endl;
+//		exit(EXIT_FAILURE);
+//	}
+//
+//	fout_B.write((char *)&book, sizeof book);
+//	fout_B.close();
+//
+//	ofstream fout_U(file1,
+//		ios_base::out | ios_base::app | ios_base::binary);
+//	//NOTE: some systems don't accept the ios::binary mode
+//	if (!fout_U.is_open())
+//	{
+//		FullClearRow(42);
+//		SetConsoleCursorPosition(2, 42);
+//		cerr << "Can't open ->" << file1 << " file for output:" << endl;
+//		exit(EXIT_FAILURE);
+//	}
+//
+//
+//	fout_U.write((char *)&user, sizeof user);
+//
+//	fout_U.close();
+//
+//}
 //void OpenFile(string filename, int tab){
 //string file =  filename ;
 //Book book;

@@ -30,20 +30,11 @@ int main(){
 					tab = ButtonTab(tab);
 
 					if (0 == tab)
-					{
 						showmenuBook();
-						for (int i = 41; i < 43; i++)
-							FullClearRow(i);
-						SetConsoleCursorPosition(2, 42);
-					}
 					else
-					{
-						showmenuUser();  
-						for (int i = 41; i < 43; i++)
-							FullClearRow(i);
-						SetConsoleCursorPosition(2, 42);
-					}
+						showmenuUser(); 
 
+					ClearRow();
 					break;
 				}
 				case 16: cout << "SHIFT=10";
@@ -54,14 +45,24 @@ int main(){
 					break;
 				}
 				case 27: cout << "Esc=27 ";
+
+					ClearRow();
 					break;
 				case 72: cout << "MVK_UP = 72";
+
+					ClearRow();
 					break;
 				case 75: cout << "MVK_LEFT = 75";
+
+					ClearRow();
 					break;
 				case 77: cout << "MVK_RIGHT = 77";
+
+					ClearRow();
 					break;
 				case 80: cout << "MVK_DOWN = 80";
+
+					ClearRow();
 					break;
 				case 'e':;
 				case 'E': {
@@ -71,9 +72,6 @@ int main(){
 						cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 						Add(tab,st_book);
 						ReadMyFile(tab, st_book);
-						for (int i = 41; i < 43; i++)
-							FullClearRow(i);
-						SetConsoleCursorPosition(2, 42);
 					}
 					else { 
 						showmenuUser();
@@ -81,10 +79,8 @@ int main(){
 						cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 						Add(tab, st_user);
 						ReadMyFile(tab, st_user);
-						for (int i = 41; i < 43; i++)
-							FullClearRow(i);
-						SetConsoleCursorPosition(2, 42);
 					}
+					ClearRow();
 					break;
 				}
 				//case 's':;
@@ -94,23 +90,23 @@ int main(){
 				case 'q':;								  //work
 				case 'Q': {
 					quit = ButtonQuit();
+					ClearRow();
 					break;
 				}
 				case 't':;
 				case 'T': {
-					SetConsoleCursorPosition(2, 5);
-					
+					ClearRow();
 					break;
 				}
 				case 'o':;
 				case 'O': {
 					if (tab == 0) {
 						FullClearRow(41);
+						BookClearRow();
 						SetConsoleCursorPosition(2, 41);
 						cout << "Enter file name ->";
 						std::cin >> st_book;
 						ReadMyFile(tab, st_book);
-						
 					}
 					else {
 						FullClearRow(41);
@@ -118,15 +114,22 @@ int main(){
 						cout << "Enter file name ->";
 						std::cin >> st_user;
 						ReadMyFile(tab, st_user);
-					} 
-					for (int i = 41; i < 43; i++)
-							FullClearRow(i);
-						SetConsoleCursorPosition(2, 42);
+					}
 
+					ClearRow();
 					break; 
-				}case 's':;
-				case 'S': {
+				}case 'r':;
+				case 'R': {	  
+					if (tab == 0) {
+						RandomLineEdit(tab, st_book);
+						ReadMyFile(tab, st_book);
+					}
+					else {
+						RandomLineEdit(tab, st_user);
+						ReadMyFile(tab, st_user);
+					}
 
+					ClearRow();
 					break;
 				}
 				case 'f':;
@@ -146,9 +149,7 @@ int main(){
 						Filename(tab, st_user);
 					}
 
-					for (int i = 41; i < 43; i++)
-						FullClearRow(i);
-					SetConsoleCursorPosition(2, 42);
+					ClearRow();
 					break;	   
 				}
 				case 13: {
@@ -158,10 +159,11 @@ int main(){
 				default:
 					cout << " That's not a choice.";
 				}
-				SetConsoleCursorPosition(45, 5);
+				//SetConsoleCursorPosition(45, 5);
 				//ReadMyFile(1);		  // курсу на парковкy
 				//ReadMyFile(0);
-				SetConsoleCursorPosition(2, 42);
+				//SetConsoleCursorPosition(2, 42);
+				ClearRow();
 				
 			}	
 		}
