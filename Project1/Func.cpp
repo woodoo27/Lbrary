@@ -220,11 +220,10 @@ void ReadMyFile(int tab, string filename) {
 		fin.open(file, ios_base::in | ios_base::binary);		// binary file
 																//NOTE: some systems don't accept the ios_base::binary mode
 		if (fin.is_open()) {
-			SetConsoleCursorPosition(2, 60);
-			cout << "Here are the current contents of the book"
-				<< file << " file:\n";
-			SetConsoleCursorPosition(0, 5);
+			SetConsoleCursorPosition(10, 3);
+			cout << "Name Book's file->"<< file ;
 
+			SetConsoleCursorPosition(0, 5);
 			while (fin.read((char *)&book, sizeof book)) {
 
 				cout << setiosflags(ios::left);					//viravnivanie
@@ -240,10 +239,10 @@ void ReadMyFile(int tab, string filename) {
 		fin.open(file, ios_base::in | ios_base::binary);  // binary file
 														   //NOTE: some systems don't accept the ios_base::binary mode
 		if (fin.is_open()) {
-			SetConsoleCursorPosition(2, 59);
-			cout << "Here are the current contents of the user "
-				<< file << " file1:\n";
+			SetConsoleCursorPosition(62, 3);
+			cout << "Name User's file->" << file ;
 			int i = 5;
+
 			SetConsoleCursorPosition(51, 5);
 			while (fin.read((char *)&user, sizeof user)) {
 

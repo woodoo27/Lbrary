@@ -32,7 +32,8 @@ void SetConsoleCursorPosition(short x_position, short y_position);
 
 /////////////////////////////////////////////////func file
 void ReadMyFile(int tab,string filename);
-void Add(int tab,string filename);
+void Add(int tab,string filename);	
+string Filename(int tab, string filename);
 /////////////////////////////////////////////////func menu & button
 void showmenu();
 void showmenuBook();
@@ -55,7 +56,7 @@ void FullView(int tab);
 
  ////////////////////Final
 void OpenFile(string filenamen, int tab);				 
-string Filename(int tab);
+
 
 
 

@@ -10,7 +10,6 @@
 
 void OpenFile(string filename, int tab){
 string file =  filename ;
-string file1 = filename ;
 Book book;
 User user;
 
@@ -23,15 +22,23 @@ if (tab = 0) {
 	if (fin_B.is_open()) {
 				
 		FullClearRow(41);
-		SetConsoleCursorPosition(2, 41);
-		cout << "Here are the current contents of the book->"
-			<< file << " file:\n";
-		fin_B.read((char *)&book, sizeof book);
+		SetConsoleCursorPosition(15, 3);
+		cout << "Name Book's file->"
+			<< file << " open:\n";
+		SetConsoleCursorPosition(0, 5);
+		while (fin_B.read((char *)&book, sizeof book)) {
+
+			cout << setiosflags(ios::left);					//viravnivanie
+			cout << char(186) << setw(20) << book.B_name;
+			cout << '|' << setw(5) << book.ID_b;
+			cout << '|' << setw(3) << book.Cou << endl;
+		}
+		fin_B.close();
 
 	}
 	else {
 		FullClearRow(41);
-		SetConsoleCursorPosition(2, 41);
+		SetConsoleCursorPosition(60, 3);
 		cout << "Error open file->" << file << endl;
 	}
 	fin_B.close();
@@ -39,20 +46,26 @@ if (tab = 0) {
    else{
 	  
 		ifstream fin_U;
-		fin_U.open(file1, ios_base::in | ios_base::binary);		// binary file
-																//NOTE: some systems don't accept the ios_base::binary mode
+		fin_U.open(file, ios_base::in | ios_base::binary);		// binary file
+		int i = 5;														//NOTE: some systems don't accept the ios_base::binary mode
 		if (fin_U.is_open()) {
 			FullClearRow(42);
-			SetConsoleCursorPosition(2, 42);
-			cout << "Here are the current contents of the book->"
-				<< file1 << " file:\n";
+			SetConsoleCursorPosition(1, 42);
+			cout << "Name User's file->"
+				<< file << " file:\n";
 
-			fin_U.read((char *)&book, sizeof book);
+			fin_U.read((char *)&user, sizeof user);
+			SetConsoleCursorPosition(51, i);
+			cout << setiosflags(ios::left);
+			cout << setw(15) << user.U_Name << '|' << setw(10) << user.Hbir << endl;
+			//cout << '|' << setw(11) << user.DateIs;
+			//cout << '|' << setw(11) << user.Pas << endl;
+			i++;
 		}
 		else {
 			FullClearRow(42);
 			SetConsoleCursorPosition(2, 42);
-			cout << "Error open file->" << file1 << endl;
+			cout << "Error open file->" << file << endl;
 
 		}
 		fin_U.close();
@@ -60,19 +73,7 @@ if (tab = 0) {
 }
 ///////////////////////////////////////////////////not corect
 
-string Filename(int tab) {				//not work corect
-	string filename;
-	
-	if (tab==0){
-		FullClearRow(41);
-		SetConsoleCursorPosition(2, 41);
-	cout << "Enter name for name for Book DataBase->"; }
-	else{
-		FullClearRow(41);
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter file name for User DataBase->";
-	}
-	cin >> filename;
+string Filename(int tab, string filename) {				//not work corect
 	ofstream fout(filename.c_str());  // create output stream object for new file and call it fout
 	fout.close();           // close file
 	return filename;

@@ -18,6 +18,7 @@ int main(){
 	
 	UGI(tab);
 	showmenuBook();
+	SetConsoleCursorPosition(2, 42);
 		for (; quit == true;) {
 				
 			if (_kbhit()) {
@@ -27,9 +28,19 @@ int main(){
 					tab = ButtonTab(tab);
 
 					if (0 == tab)
+					{
 						showmenuBook();
+						for (int i = 41; i < 43; i++)
+							FullClearRow(i);
+						SetConsoleCursorPosition(2, 42);
+					}
 					else
-						showmenuUser();
+					{
+						showmenuUser();  
+						for (int i = 41; i < 43; i++)
+							FullClearRow(i);
+						SetConsoleCursorPosition(2, 42);
+					}
 
 					break;
 				}
@@ -58,8 +69,9 @@ int main(){
 						cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 						Add(tab,st_book);
 						ReadMyFile(tab, st_book);
+						for (int i = 41; i < 43; i++)
+							FullClearRow(i);
 						SetConsoleCursorPosition(2, 42);
-						ClearRow();
 					}
 					else { 
 						showmenuUser();
@@ -67,8 +79,9 @@ int main(){
 						cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 						Add(tab, st_user);
 						ReadMyFile(tab, st_user);
+						for (int i = 41; i < 43; i++)
+							FullClearRow(i);
 						SetConsoleCursorPosition(2, 42);
-						ClearRow();
 					}
 					break;
 				}
@@ -97,40 +110,50 @@ int main(){
 				case 'o':;
 				case 'O': {
 					if (tab == 0) {
+						FullClearRow(41);
 						SetConsoleCursorPosition(2, 41);
-						cout << "Enter file name";
+						cout << "Enter file name ->";
 						std::cin >> st_book;
 						ReadMyFile(tab, st_book);
+						
 					}
 					else {
+						FullClearRow(41);
 						SetConsoleCursorPosition(2, 41);
-						cout << "Enter file name";
+						cout << "Enter file name ->";
 						std::cin >> st_user;
 						ReadMyFile(tab, st_user);
-					}
+					} 
+					for (int i = 41; i < 43; i++)
+							FullClearRow(i);
+						SetConsoleCursorPosition(2, 42);
 
 					break; 
 				}case 's':;
 				case 'S': {
-					SaveFile1();
 
 					break;
 				}
 				case 'f':;
 				case 'F': {
-					if (tab == 0)
-					{
-						st_book = Filename(tab);
-						ReadMyFile(0, st_book);
+
+					if (tab == 0) {
+						FullClearRow(41);
+						SetConsoleCursorPosition(2, 41);
+						cout << "Enter new file name for Book DataBase->";	
+						cin >> st_book;
+						Filename(tab, st_book);
 					}
-					else
-					{
-						st_user = Filename(tab);
-						ReadMyFile(0, st_user);
+					else {
+						FullClearRow(41);
+						SetConsoleCursorPosition(2, 41);
+						cout << "Enter new file name for User DataBase->";	 
+						Filename(tab, st_user);
 					}
 
+					for (int i = 41; i < 43; i++)
+						FullClearRow(i);
 					SetConsoleCursorPosition(2, 42);
-					ClearRow();
 					break;	   
 				}
 				case 13: {
