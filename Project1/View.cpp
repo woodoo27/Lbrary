@@ -5,7 +5,7 @@
 #include <conio.h>	 //console
 #include "My_Lib.h"
 
- //////////////////////////good
+ //////////////////////////Clear func
 
 
 void FullClearRow(int y) {														//clear row ->y
@@ -15,40 +15,28 @@ void FullClearRow(int y) {														//clear row ->y
 		cout << " ";
 }
 
+void BookClearRow() {														 //clear  books fill " "
+	for (int i = 5; i < 40; i++) {
+		cout << setiosflags(ios::left);
+		SetConsoleCursorPosition(1, i);
+		cout << setfill(' ') << setw(49) << " " << endl;
+	}
+}
 
-
-
-
-
-
-
-
-////////////////////////////////////uncnoun func
-void ClearRow()
+void ClearRow()																//clear info roow 
 {
 	SetConsoleCursorPosition(2, 42);
 	for (int i = 0; i<90; i++)
 		cout << " ";
 	SetConsoleCursorPosition(2, 42);
-}		
+}	
+//////////////////////////Clear func end
 
-void TabClearRow() {
-SetConsoleCursorPosition(0, 5);
-	for (int y = 5; y < 40; y++) {
-		for (int x = 1; x < 99; x++) {
-			
-			if (x == 50) {
-				SetConsoleCursorPosition(x, y);
-				cout << char(179);
-			}
-			else {
-				SetConsoleCursorPosition(x, y);
-				cout << " ";
-			}
-		}
-	}
-}
-//////////////////////////////////Delete
+
+
+
+
+//////////////////////////////////edit func
 void FullView(int tab) {
 
 	const char * file = "Book.dat";

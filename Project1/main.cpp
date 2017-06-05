@@ -14,7 +14,9 @@ int main(){
 	int joke = 0;
 	string st_book;
 	string st_user;
-
+	bool chek_edit;
+	int str_cou_u = 0;   //count string	user
+	int str_cou_b = 0;   //count string	book
 	
 	UGI(tab);
 	showmenuBook();
@@ -87,16 +89,9 @@ int main(){
 				}
 				//case 's':;
 				//case 'S': {
-				//	void TabClearRow();
-
-				//	ReadMyFile(0);
-				//	ReadMyFile(1); 
-
-				//	SetConsoleCursorPosition(2, 42);
-				//	ClearRow();	 
 				//	break;
 				//}
-				case 'q':;
+				case 'q':;								  //work
 				case 'Q': {
 					quit = ButtonQuit();
 					break;
@@ -135,7 +130,7 @@ int main(){
 					break;
 				}
 				case 'f':;
-				case 'F': {
+				case 'F': {									   //chek file not new
 
 					if (tab == 0) {
 						FullClearRow(41);

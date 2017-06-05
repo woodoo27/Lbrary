@@ -135,7 +135,7 @@ void showmenuUser() {
 }
 
 /////////////////////////////Good
-int ButtonTab(int t)
+int ButtonTab(int t)				   //Tab
 {
 	t++;
 	if (2 == t)
@@ -164,17 +164,17 @@ int ButtonTab(int t)
 		std::cout << "Member: 2"; //insert id user
 	}
 	return t;
-}
+}	
 
-bool ButtonQuit() {
+bool ButtonQuit() {				                              //Quit
 	cout << "q - key to quit" << endl;
 	char key = _getch();
 	if (key == 'q' || key == 'Q')
 		return false;
 	return true;
-}
+}		  //
 
-int ButtonReturn(int j) {
+int ButtonReturn(int j) {									 //joke
 	j++;
 	if (10 == j) {
 		cout << "do not play\n";
@@ -183,7 +183,6 @@ int ButtonReturn(int j) {
 	return j;
 }
 
-///////////////////////////////////////////
 
 //////////////////////console
 
@@ -207,252 +206,8 @@ void SetConsoleCursorPosition(short x_position, short y_position) {
 	SetConsoleCursorPosition(hConsole, _coordPosition);
 }
 
-void ReadMyFile(int tab, string filename) {
-	//const char * file = "Book.dat";
-	//const char * file1 = "User.dat";
-
-	string file = filename;
-	
-	Book book;
-	User user;
-	if (tab == 0) {
-		ifstream fin;
-		fin.open(file, ios_base::in | ios_base::binary);		// binary file
-																//NOTE: some systems don't accept the ios_base::binary mode
-		if (fin.is_open()) {
-			SetConsoleCursorPosition(10, 3);
-			cout << "Name Book's file->"<< file ;
-
-			SetConsoleCursorPosition(0, 5);
-			while (fin.read((char *)&book, sizeof book)) {
-
-				cout << setiosflags(ios::left);					//viravnivanie
-				cout << char(186) << setw(20) << book.B_name;
-				cout << '|' << setw(5) << book.ID_b;
-				cout << '|' << setw(3) << book.Cou << endl;
-			}
-			fin.close();
-		}
-	}
-	else {
-		ifstream fin;
-		fin.open(file, ios_base::in | ios_base::binary);  // binary file
-														   //NOTE: some systems don't accept the ios_base::binary mode
-		if (fin.is_open()) {
-			SetConsoleCursorPosition(62, 3);
-			cout << "Name User's file->" << file ;
-			int i = 5;
-
-			SetConsoleCursorPosition(51, 5);
-			while (fin.read((char *)&user, sizeof user)) {
-
-				SetConsoleCursorPosition(51, i);
-				cout << setiosflags(ios::left);
-				cout << setw(15) << user.U_Name << '|' << setw(10) << user.Hbir << endl;
-				//cout << '|' << setw(11) << user.DateIs;
-				//cout << '|' << setw(11) << user.Pas << endl;
-				i++;
-			}
-			fin.close();
-		}
-	}
-}
-
-void Add(int tab,string filename) {																	//add user or book
-	//const char * file = "Book.dat";
-	//const char * file1 = "User.dat";
-	string file = filename;
-	Book book;
-	User user;
-	char buf[16];
-	int temp;
-
-	if (tab == 0) {
-		ofstream fout(file,
-			ios_base::out | ios_base::app | ios_base::binary);
-		//NOTE: some systems don't accept the ios::binary mode
-		if (!fout.is_open())
-		{
-			
-			SetConsoleCursorPosition(2, 41); 
-			ClearRow();
-			cerr << "Can't open " << file << " file for output:\t\t\t\t\t\n";
-			exit(EXIT_FAILURE);
-		}
-
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter book name (enter a blank line to quit):\t\t\t\t\t\n";
-		ClearRow();
-		cin.get(book.B_name, 30);
-		if (book.B_name[0] != '\0')
-			eatline();
-		else {
-			SetConsoleCursorPosition(2, 41);
-			cout << "\t\t\t\t\t\t\t\t\t\t\t\n";
-			return;	
-		}
-		cin.clear(0);
-		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
-
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Author Name ->Format Name Surname Patronymic:\t\t\t\t\t\n";
-		ClearRow();
-		cin.get(book.Aut, 100);
-		if (book.Aut[0] != '\0')
-			eatline();
-
-		cin.clear(0);
-		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
-
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Release date ->Format dd.mm.yyyy:\t\t\t\t\t\n";
-		ClearRow();
-		cin.get(book.R_date, 11);
-		if (book.R_date[0] != '\0')
-			eatline();
-
-		cin.clear(0);
-		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
-
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Book context:\t\t\t\t\t\n";
-		ClearRow();
-		cin.get(book.Con, 30);
-		if (book.Con[0] != '\0')
-			eatline();
-
-		cin.clear(0);
-		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 
 
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Book count:\t\t\t\t\t\n";
-		ClearRow();
-		cin.getline(buf, 8);
-		temp = atoi(buf);
-
-		while (1>temp || temp>11)
-		{
-
-			SetConsoleCursorPosition(2, 41);
-			cout << "Erorr! Enter an integer between 1 and 10, inclusive:\t\t\t\n";
-			ClearRow();
-			cin.getline(buf, 5);
-			temp = atoi(buf);
-			
-		}
-		book.Cou = temp;
-
-		eatline();
-
-		cin.clear(0);
-		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
-
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Book rate:\t\t\t\t\t\n";
-		ClearRow();
-		cin.getline(buf, 8);
-		temp = atoi(buf);
-
-		while (0>temp || temp>11)
-		{
-
-			SetConsoleCursorPosition(2, 41);
-			cout << "Erorr! Enter an integer between 0 and 5, inclusive.\t\t\t\n";
-			ClearRow();
-			cin.getline(buf,5);
-			temp = atoi(buf);
-
-		}
-		book.Rat = temp;
-		eatline();
-
-		cin.clear(0);
-		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
-
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Book ID:\t\t\t\t\t\n";
-		ClearRow();
-		cin >> book.ID_b;
-		eatline();
-
-		cin.clear(0);
-		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
-
-		if (book.B_name[0] != '\0')
-			fout.write((char *)&book, sizeof book);
-		fout.close();
-	}
-	
-	else {
-		ofstream fout(file,
-			ios_base::out | ios_base::app | ios_base::binary);
-		//NOTE: some systems don't accept the ios::binary mode
-		if (!fout.is_open())
-		{
-			
-			SetConsoleCursorPosition(2, 41);
-			ClearRow();
-			cerr << "Can't open " << file << " file for output:\t\t\t\t\t\n";
-			exit(EXIT_FAILURE);
-		}
-
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Member name (enter a blank line to quit):\t\t\t\t\t\n";
-		ClearRow();
-		cin.get(user.U_Name, 30);
-		if (user.U_Name[0] != '\0')
-			eatline();
-		else {
-			SetConsoleCursorPosition(2, 41);
-			cout << "\t\t\t\t\t\t\t\t\t\t\t\n";
-			return;
-		}
-
-		cin.clear(0);
-		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
-
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter birthday user  format (enter a blank line to quit):\t\t\t\n";
-		ClearRow();
-		cin.get(user.Hbir, 11);
-		if (user.Hbir[0] != '\0')
-			eatline();
-
-		cin.clear(0);
-		cin.ignore(cin.rdbuf()->in_avail());
-
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Date of issue  format dd.mm.yyyy (enter a blank line to quit):\t\t\t\n";
-		ClearRow();
-		cin.get(user.DateIs, 11);
-		if (user.DateIs[0] != '\0')
-			eatline();
-
-		cin.clear(0);
-		cin.ignore(cin.rdbuf()->in_avail());
-
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter ID-user format 0000 (enter a blank line to quit):\t\t\t\n";
-		ClearRow();
-		cin.get(user.ID_vs_ID, 5);
-		if (user.ID_vs_ID[0] != '\0')
-			eatline();
-
-		cin.clear(0);
-		cin.ignore(cin.rdbuf()->in_avail());
-
-		if (user.U_Name[0] != '\0')
-			fout.write((char *)&user, sizeof user);
-		fout.close();
-	}
-	
-	SetConsoleCursorPosition(2, 41);
-	cout << "\t\t\t\t\t\t\t\t\t\t\t\n";
-	ClearRow();
-	cin.clear(0);
-	cin.ignore(cin.rdbuf()->in_avail());
-}
 
 
 

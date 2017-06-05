@@ -55,14 +55,14 @@ void FullView(int tab);
 
 
  ////////////////////Final
-void OpenFile(string filenamen, int tab);				 
+//void OpenFile(string filenamen, int tab);				 
 
 
 
 
 
 void FullClearRow(int y);
-
+void BookClearRow();
 
 
 
