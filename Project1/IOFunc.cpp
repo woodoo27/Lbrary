@@ -90,7 +90,7 @@ void Add(int tab, string filename) {																	//add user or book
 	string file = filename;
 	Book book;
 	User user;
-	char buf[100];
+	char buf[200];
 	int temp;
 
 	if (tab == 0) {
@@ -109,7 +109,18 @@ void Add(int tab, string filename) {																	//add user or book
 		SetConsoleCursorPosition(2, 41);
 		cout << "Enter book name (enter a blank line to quit):\t\t\t\t\t\n";
 		ClearRow();
-		cin.get(book.B_name, 30);
+		cin.get(book.B_name, 110);
+
+		while (strlen(book.B_name) > 100)
+		{
+			SetConsoleCursorPosition(2, 41);
+			cout << "Enter book name (max - 100):\t\t\t\t\t\n";
+			ClearRow();
+			cin.clear(0);
+			cin.ignore(cin.rdbuf()->in_avail());
+			cin.get(book.B_name, 110);
+		}
+
 		if (book.B_name[0] != '\0')
 			eatline();
 		else {
@@ -123,7 +134,20 @@ void Add(int tab, string filename) {																	//add user or book
 		SetConsoleCursorPosition(2, 41);
 		cout << "Enter Author Name ->Format Name Surname Patronymic:\t\t\t\t\t\n";
 		ClearRow();
-		cin.get(book.Aut, 100);
+		cin.clear(0);
+		cin.ignore(cin.rdbuf()->in_avail());
+		cin.get(book.Aut, 40);
+
+		while (strlen(book.Aut) > 36)
+		{
+			SetConsoleCursorPosition(2, 41);
+			cout << "Enter Author Name ->(max - 33):\t\t\t\t\t\n";
+			ClearRow();
+			cin.clear(0);
+			cin.ignore(cin.rdbuf()->in_avail());
+			cin.get(book.Aut, 40);
+		}
+
 		if (book.Aut[0] != '\0')
 			eatline();
 
