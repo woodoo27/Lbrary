@@ -90,7 +90,7 @@ void Add(int tab, string filename) {																	//add user or book
 	string file = filename;
 	Book book;
 	User user;
-	char buf[16];
+	char buf[100];
 	int temp;
 
 	if (tab == 0) {
@@ -133,7 +133,16 @@ void Add(int tab, string filename) {																	//add user or book
 		SetConsoleCursorPosition(2, 41);
 		cout << "Enter Release date ->Format dd.mm.yyyy:\t\t\t\t\t\n";
 		ClearRow();
-		cin.get(book.R_date, 11);
+		cin.get(book.R_date, 100);
+									
+		while(strlen(book.R_date)>10)		//chek leng
+		{SetConsoleCursorPosition(2, 41);
+		cout << "Enter Release date ->Format dd.mm.yyyy:\t\t\t\t\t\n";
+		ClearRow();
+		cin.clear(0);
+		cin.ignore(cin.rdbuf()->in_avail());
+		cin.get(book.R_date, 100);	}				 //temp
+
 		if (book.R_date[0] != '\0')
 			eatline();
 
