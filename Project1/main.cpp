@@ -11,6 +11,7 @@ int main(){
 	//setlocale(LC_ALL, "RUS");
 	int  tab = 0;
 	bool quit = true;
+	int fullmode = 0;
 	int joke = 0;
 	string st_book;
 	string st_user;
@@ -66,20 +67,23 @@ int main(){
 					break;
 				case 'e':;
 				case 'E': {
-					if (0 == tab) {
-						showmenuBook();
-						cin.clear(0);
-						cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
-						Add(tab,st_book);
-						ReadMyFile(tab, st_book);
+					if (fullmode == true) {
+						if (0 == tab) {
+							showmenuBook();
+							cin.clear(0);
+							cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
+							Add(tab, st_book);
+							ReadMyFile(tab, st_book);
+						}
+						else {
+							showmenuUser();
+							cin.clear(0);
+							cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
+							Add(tab, st_user);
+							ReadMyFile(tab, st_user);
+						}
 					}
-					else { 
-						showmenuUser();
-						cin.clear(0);
-						cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
-						Add(tab, st_user);
-						ReadMyFile(tab, st_user);
-					}
+					
 					ClearRow();
 					break;
 				}
@@ -95,13 +99,25 @@ int main(){
 				}
 				case 't':;
 				case 'T': {
-					ClearRow();
-					for(int i=5;i<40;i++)
-						FullClearRow(41);
-					if(tab==0)
-						ReadMyFule (tab, st_book);
-					else
-						ReadMyFule(tab, st_user);
+					fullmode = ButtonFullMode(fullmode);
+					ClearRow();	if (fullmode == 1) {
+						for (int i = 5; i < 40; i++)
+							FullClearRow(41);
+						if (tab == 0)
+							ReadMyFule(tab, st_book);
+						else
+							ReadMyFule(tab, st_user);
+					}
+					else {
+						for (int i = 5; i < 40; i++)
+							FullClearRowPanel(i);
+						if(tab==0)
+							ReadMyFile(tab, st_book);
+						else
+							ReadMyFile(tab, st_user);
+					}
+
+
 					break;
 				}
 				case 'o':;

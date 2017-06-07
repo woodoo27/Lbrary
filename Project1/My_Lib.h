@@ -48,9 +48,11 @@ void UGI(int tab);
 int ButtonReturn(int j);
 int ButtonTab(int tab);
 bool ButtonQuit();
+int ButtonFullMode(int t);
 
 //////////////////////////////////////////////for clear
 void FullClearRow(int y);
+void FullClearRowPanel(int y);
 void BookClearRow();
 void ClearRow();
 

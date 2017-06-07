@@ -15,10 +15,23 @@ void FullClearRow(int y) {														//clear row ->y
 		cout << " ";
 }
 
-void BookClearRow() {														 //clear  books fill " "
+void FullClearRowPanel(int y) {	
+	SetConsoleCursorPosition(2, y);
+	for (int i = 0; i<98; i++)
+		cout << " ";												//clear row ->y
+
+	for (int i = 3; i < 40; i++) {
+		SetConsoleCursorPosition(50, i);
+		cout << char(179) << "\n";
+	}
+}
+
+void BookClearRow() {								  //clear  books fill " "
+	
 	for (int i = 5; i < 40; i++) {
-		cout << setiosflags(ios::left);
+		
 		SetConsoleCursorPosition(1, i);
+		cout << setiosflags(ios::left);
 		cout << setfill(' ') << setw(49) << " " << endl;
 	}
 }
@@ -30,13 +43,7 @@ void ClearRow()																//clear info roow
 		cout << " ";
 	SetConsoleCursorPosition(2, 42);
 }	
-//////////////////////////Clear func end
 
-
-
-
-
-//////////////////////////////////edit func
 void FullMode(int tab) {
 
 	const char * file = "Book.dat";

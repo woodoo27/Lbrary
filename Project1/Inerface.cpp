@@ -183,7 +183,14 @@ int ButtonReturn(int j) {									 //joke
 	return j;
 }
 
-
+int ButtonFullMode(int t) {
+	t++;
+	if (2 == t)
+	{
+		t = 0;
+	}
+	return t;
+}
 //////////////////////console
 
 void SetConsoleWinSizePosition(int width = 0, int heigth = 0, short x_position = 0, short y_position = 0) {
