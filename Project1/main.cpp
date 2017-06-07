@@ -146,7 +146,9 @@ int main(){
 
 						FullClearRow(41);
 						SetConsoleCursorPosition(2, 41);
-						cout << "Enter new file name for Book DataBase->";	
+						cout << "Enter new file name for Book DataBase->";
+						cin.clear(0);
+						cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 						cin >> st_book;
 						Filename(tab, st_book);
 					}
@@ -154,6 +156,9 @@ int main(){
 						FullClearRow(41);
 						SetConsoleCursorPosition(2, 41);
 						cout << "Enter new file name for User DataBase->";	 
+						cin.clear(0);
+						cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
+						cin >> st_user;
 						Filename(tab, st_user);
 					}
 

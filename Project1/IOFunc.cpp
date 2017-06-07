@@ -13,7 +13,7 @@
 void Filename(int tab, string filename) {				
 	ofstream fout(filename.c_str());  // create output stream object for new file and call it fout
 	fout.close();					  // close file
-	
+	return;
 	
 }
 //////////////////////////////////////////////Read file
@@ -621,6 +621,30 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());
 
+
+
+		SetConsoleCursorPosition(2, 41);
+		cout << "Enter Passport 0000:\t\t\t\t\t\n";
+		ClearRow();
+		cin.getline(buf, 8);
+		temp = atoi(buf);
+
+		while (1 > temp || temp > 9999 || !atoi(buf)) {
+
+			SetConsoleCursorPosition(2, 41);
+			cout << "Erorr! Enter format 0000 (enter a blank line to quit):\t\t\t\n";
+			ClearRow();
+			cin.getline(buf, 5);
+			temp = atoi(buf);
+
+		}
+		user.Pas = temp;
+
+		eatline();
+
+
+
+
 		finout.seekp(place1);    // go back
 		finout.write((char *)&user, sizeof user) << flush;
 
@@ -634,6 +658,7 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 		cout << '|' << setw(11) << user.DateIs;
 		cout << '|' << setw(20) << user.ID_vs_ID << endl;
 		cout << '|' << setw(20) << user.Pas << endl;
+		cout  << setw(13) <<  char(186) << endl;
 
 		if (finout.fail()) {
 			SetConsoleCursorPosition(2, 41);
