@@ -98,7 +98,10 @@ int main(){
 					ClearRow();
 					for(int i=5;i<40;i++)
 						FullClearRow(41);
-					ReadMyFule (tab, st_book);
+					if(tab==0)
+						ReadMyFule (tab, st_book);
+					else
+						ReadMyFule(tab, st_user);
 					break;
 				}
 				case 'o':;
