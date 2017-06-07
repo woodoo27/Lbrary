@@ -65,7 +65,7 @@ int main(){
 
 					ClearRow();
 					break;
-				case 'e':;
+				case 'e':;								   //work
 				case 'E': {
 					if (fullmode == true) {
 						if (0 == tab) {
@@ -86,7 +86,7 @@ int main(){
 					
 					ClearRow();
 					break;
-				}
+				}						   
 				//case 's':;
 				//case 'S': {
 				//	break;
@@ -117,7 +117,8 @@ int main(){
 							ReadMyFile(tab, st_user);
 					}
 
-
+					cin.clear(0);
+					cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 					break;
 				}
 				case 'o':;
@@ -177,7 +178,8 @@ int main(){
 						cin >> st_user;
 						Filename(tab, st_user);
 					}
-
+					cin.clear(0);
+					cin.ignore(cin.rdbuf()->in_avail());
 					ClearRow();
 					break;	   
 				}
