@@ -67,9 +67,9 @@ void ClearRow();
 
 
 
+void ReadMyFule(int tab, string filename);
 
-
-void SaveFile();
-void SaveFile1();
+//void SaveFile();
+//void SaveFile1();
 
 #endif

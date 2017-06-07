@@ -103,7 +103,8 @@ void Add(int tab, string filename) {																	//add user or book
 			SetConsoleCursorPosition(2, 41);
 			ClearRow();
 			cerr << "Can't open " << file << " file for output:\t\t\t\t\t\n";
-			exit(EXIT_FAILURE);
+			/*exit(EXIT_FAILURE);*/
+			return;
 		}
 
 		SetConsoleCursorPosition(2, 41);
@@ -159,7 +160,7 @@ void Add(int tab, string filename) {																	//add user or book
 		ClearRow();
 		cin.get(book.R_date, 100);
 									
-		while(strlen(book.R_date)>10)		//chek leng
+		while(strlen(book.R_date)>11)		//chek leng
 		{SetConsoleCursorPosition(2, 41);
 		cout << "Enter Release date ->Format dd.mm.yyyy:\t\t\t\t\t\n";
 		ClearRow();
@@ -173,10 +174,22 @@ void Add(int tab, string filename) {																	//add user or book
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 
+		
 		SetConsoleCursorPosition(2, 41);
 		cout << "Enter Book context:\t\t\t\t\t\n";
 		ClearRow();
-		cin.get(book.Con, 30);
+		cin.get(book.Con, 60);
+
+		while (strlen(book.Con) > 31) {
+			SetConsoleCursorPosition(2, 41);
+			cout << "Erorr!Enter Book context->(max - 30):\t\t\t\t\t\n";
+			ClearRow();
+			cin.clear(0);
+			cin.ignore(cin.rdbuf()->in_avail());
+			cin.get(book.Con, 60);
+		}
+
+
 		if (book.Con[0] != '\0')
 			eatline();
 
@@ -190,9 +203,8 @@ void Add(int tab, string filename) {																	//add user or book
 		cin.getline(buf, 8);
 		temp = atoi(buf);
 
-		while (1>temp || temp>11)
+		while (1>temp || temp>11 || !atoi(buf))
 		{
-
 			SetConsoleCursorPosition(2, 41);
 			cout << "Erorr! Enter an integer between 1 and 10, inclusive:\t\t\t\n";
 			ClearRow();
@@ -213,7 +225,7 @@ void Add(int tab, string filename) {																	//add user or book
 		cin.getline(buf, 8);
 		temp = atoi(buf);
 
-		while (0>temp || temp>11)
+		while (0>temp || temp>5 || !atoi(buf))
 		{
 
 			SetConsoleCursorPosition(2, 41);
@@ -232,8 +244,23 @@ void Add(int tab, string filename) {																	//add user or book
 		SetConsoleCursorPosition(2, 41);
 		cout << "Enter Book ID:\t\t\t\t\t\n";
 		ClearRow();
-		cin >> book.ID_b;
+		cin.getline(buf,10);
+		temp = atoi(buf);
+
+		while (0>temp || temp>9999 || !atoi(buf))
+		{
+
+			SetConsoleCursorPosition(2, 41);
+			cout << "Erorr! Enter an integer between 0 and 9999, inclusive.\t\t\t\n";
+			ClearRow();
+			cin.getline(buf, 10);
+			temp = atoi(buf);
+
+		} 
+		book.ID_b = temp;
 		eatline();
+
+
 
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
@@ -349,7 +376,6 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 			SetConsoleCursorPosition(2, 41);
 			cerr << "Error in reading " << filename << ".\t\t\t\t\t\t\n";
 			ClearRow();
-			
 			return;
 		}
 	}
@@ -358,7 +384,6 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 		SetConsoleCursorPosition(2, 41);
 		cerr << filename << " could not be opened -- bye.\t\t\t\t\t\t\n";
 		ClearRow();
-		
 		return;
 	}
 
@@ -749,6 +774,76 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 //		fin_U.close();
 //	 }
 //}
+
+
+void ReadMyFule(int tab, string filename) {
+	int str = 1;
+	string file = filename;
+	int x = 0;
+	int y = 0;
+	Book book;
+	User user;
+	int nrow = 0;
+
+
+
+	//for (int i = 5; i < 35; i++) {
+	//	SetConsoleCursorPosition(1, i);
+	//	cout <<  setfill(' ') << setw(45) << " " << endl;	 }
+
+
+	if (tab == 0) {
+		ifstream fin;
+		fin.open(file, ios_base::in | ios_base::binary);		// binary file
+																//NOTE: some systems don't accept the ios_base::binary mode
+		if (fin.is_open()) {
+			SetConsoleCursorPosition(10, 3);
+			cout << setw(30) << file << " - open";
+
+			y = 5;
+			SetConsoleCursorPosition(0, 5);
+			while (fin.read((char *)&book, sizeof book)) {
+				
+				cout << setiosflags(ios::left);					//viravnivanie
+				cout << char(186) << nrow++ << ":" << setw(20) << book.B_name;
+				cout << '|' <<setw(20) << book.Aut ;
+				cout << '|' << setw(10) << book.R_date;
+				cout << '|' << setw(20) << book.Con ;
+				cout << '|' << setw(2) << book.Rat;
+				cout << '|' << setw(5) << book.ID_b;
+				cout << '|' << setw(3) << book.Cou << endl;
+				str++;
+				y++;
+			} nrow = 0;
+			fin.close();
+
+
+
+		}
+	}
+	else {
+		ifstream fin;
+		fin.open(file, ios_base::in | ios_base::binary);  // binary file
+														  //NOTE: some systems don't accept the ios_base::binary mode
+		if (fin.is_open()) {
+			SetConsoleCursorPosition(62, 3);
+			cout << setw(30) << file << " - open";
+			int i = 5;
+
+			SetConsoleCursorPosition(51, 5);
+			while (fin.read((char *)&user, sizeof user)) {
+
+				SetConsoleCursorPosition(51, i);
+				cout << setiosflags(ios::left);
+				cout << nrow++ << ":" << setw(15) << user.U_Name << '|' << setw(10) << user.Hbir << endl;
+				//cout << '|' << setw(11) << user.DateIs;
+				//cout << '|' << setw(11) << user.Pas << endl;
+				i++;
+			}  nrow = 0;
+			fin.close();
+		}
+	}
+}
 
 
 

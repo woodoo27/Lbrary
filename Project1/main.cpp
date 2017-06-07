@@ -96,6 +96,9 @@ int main(){
 				case 't':;
 				case 'T': {
 					ClearRow();
+					for(int i=5;i<40;i++)
+						FullClearRow(41);
+					ReadMyFule (tab, st_book);
 					break;
 				}
 				case 'o':;
@@ -136,6 +139,8 @@ int main(){
 				case 'F': {									   //chek file not new
 
 					if (tab == 0) {
+
+
 						FullClearRow(41);
 						SetConsoleCursorPosition(2, 41);
 						cout << "Enter new file name for Book DataBase->";	
