@@ -12,7 +12,9 @@
 //////////////////////////////////////////////Create new file
 void Filename(int tab, string filename) {				
 	ofstream fout(filename.c_str());  // create output stream object for new file and call it fout
-	fout.close();					  // close file
+	fout.close();
+	SetConsoleCursorPosition(2, 41);
+	cout << "New file name ->"<<filename<<"\t\t\t\t\t\n";// close file
 	return;
 	
 }
@@ -734,6 +736,37 @@ void ReadMyFule(int tab, string filename) {
 	}
 }
 
+
+void EditID(int tab, string filename) {
+	string file = filename;
+	Book book;
+	User user;
+	char buf[16];
+	int ct = 0;
+	long rec;
+	int temp;
+
+	fstream finout;     // read and write streams
+	finout.open(filename,
+		ios_base::in | ios_base::out | ios_base::binary);
+	//NOTE: Some Unix systems require omitting | ios::binary
+
+	if (finout.is_open()) {
+		finout.seekg(0);    // go to beginning
+							//cout << "Here are the current contents of the "
+							//	<< file1 << " file1:\n";
+
+		if (tab == 0) {
+			while (finout.read((char *)&book, sizeof book))
+				ct++;
+		}
+
+		else {
+			while (finout.read((char *)&user, sizeof user))
+				ct++;
+		}
+	}
+}
 
 
 

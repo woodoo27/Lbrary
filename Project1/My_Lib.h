@@ -34,11 +34,10 @@ void SetConsoleCursorPosition(short x_position, short y_position);
 void ReadMyFile(int tab,string filename);
 void Add(int tab,string filename);	
 void Filename(int tab, string filename);		  //not work 
-void FullMode(int tab);							  //not work
 
 void RandomLineEdit(int tab, string filename);
 
-
+void EditID(int tab, string filename);
 
 /////////////////////////////////////////////////func menu & button
 void showmenu();
