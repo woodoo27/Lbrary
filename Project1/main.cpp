@@ -67,7 +67,7 @@ int main(){
 					break;
 				case 'e':;								   //work
 				case 'E': {
-					if (fullmode == true) {
+					
 						if (0 == tab) {
 							showmenuBook();
 							cin.clear(0);
@@ -82,7 +82,7 @@ int main(){
 							Add(tab, st_user);
 							ReadMyFile(tab, st_user);
 						}
-					}
+					
 					
 					ClearRow();
 					break;
