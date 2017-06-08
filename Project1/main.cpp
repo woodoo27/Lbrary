@@ -100,9 +100,12 @@ int main(){
 				case 't':;
 				case 'T': {
 					fullmode = ButtonFullMode(fullmode);
-					ClearRow();	if (fullmode == 1) {
+					ClearRow();	
+					if (fullmode == 1) {
 						for (int i = 5; i < 40; i++)
-							FullClearRow(41);
+						FullClearRowPanel(i, fullmode);	  
+						FullClearRow(41);
+
 						if (tab == 0)
 							ReadMyFule(tab, st_book);
 						else
@@ -110,7 +113,7 @@ int main(){
 					}
 					else {
 						for (int i = 5; i < 40; i++)
-							FullClearRowPanel(i);
+							FullClearRowPanel(i,fullmode);
 						if(tab==0)
 							ReadMyFile(tab, st_book);
 						else
@@ -138,7 +141,7 @@ int main(){
 						std::cin >> st_user;
 						ReadMyFile(tab, st_user);
 					}
-
+					fullmode++;
 					ClearRow();
 					break; 
 				}case 'r':;

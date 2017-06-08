@@ -15,26 +15,19 @@ void FullClearRow(int y) {														//clear row ->y
 		cout << " ";
 }
 
-void FullClearRowPanel(int y) {	
-	SetConsoleCursorPosition(2, y);
-	for (int i = 0; i<98; i++)
-		cout << " ";												//clear row ->y
-
-	for (int i = 3; i < 40; i++) {
-		SetConsoleCursorPosition(50, i);
-		cout << char(179) << "\n";
-	}
-}
-
-void BookClearRow() {								  //clear  books fill " "
+void FullClearRowPanel(int y, int fullmode) {
+	SetConsoleCursorPosition(2, y);			 
 	
-	for (int i = 5; i < 40; i++) {
-		
-		SetConsoleCursorPosition(1, i);
-		cout << setiosflags(ios::left);
-		cout << setfill(' ') << setw(49) << " " << endl;
-	}
+	FullClearRow( y);
+		if (fullmode == 0) {
+			for (int i = 3; i < 40; i++) {
+				SetConsoleCursorPosition(50, i);
+				cout << char(179) << "\n";
+			}
+		}
 }
+
+
 
 void ClearRow()																//clear info roow 
 {

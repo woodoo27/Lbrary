@@ -51,8 +51,7 @@ int ButtonFullMode(int t);
 
 //////////////////////////////////////////////for clear
 void FullClearRow(int y);
-void FullClearRowPanel(int y);
-void BookClearRow();
+void FullClearRowPanel(int y,int fulllmode);
 void ClearRow();
 
 
