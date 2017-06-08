@@ -26,7 +26,13 @@ void FullClearRowPanel(int y, int fullmode) {
 			}
 		}
 }
-
+void BookClearRow() {														 //clear  books fill " "
+	for (int i = 5; i < 40; i++) {
+		cout << setiosflags(ios::left);
+		SetConsoleCursorPosition(1, i);
+		cout << setfill(' ') << setw(49) << " " << endl;
+	}
+}
 
 
 void ClearRow()																//clear info roow 

@@ -87,10 +87,13 @@ int main(){
 					ClearRow();
 					break;
 				}						   
-				//case 's':;
-				//case 'S': {
-				//	break;
-				//}
+				case 's':;
+				case 'S': {	 
+					EditID(tab, st_book);
+					ReadMyFile(tab, st_book);
+				} 
+					ClearRow();
+					break;
 				case 'q':;								  //work
 				case 'Q': {
 					quit = ButtonQuit();

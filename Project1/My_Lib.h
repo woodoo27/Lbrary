@@ -33,7 +33,7 @@ void SetConsoleCursorPosition(short x_position, short y_position);
 /////////////////////////////////////////////////func file
 void ReadMyFile(int tab,string filename);
 void Add(int tab,string filename);	
-void Filename(int tab, string filename);		  //not work 
+void Filename(int tab, string filename);		  
 
 void RandomLineEdit(int tab, string filename);
 
@@ -53,12 +53,39 @@ int ButtonFullMode(int t);
 void FullClearRow(int y);
 void FullClearRowPanel(int y,int fulllmode);
 void ClearRow();
+void BookClearRow();
 
 
 
- 
+  ////////////////////////////////////////Masage
+void MassageBook_1();
+void MassageBook_2();
+void MassageBook_3();
+void MassageBook_4();
+void MassageBook_5();
+void MassageBook_6();
+void MassageBook_7();
+void MassageBook_7();
+void MassageBook_8();
+void MassageBook_9();
+void MassageBook_10();
+void MassageBook_11();
+void MassageBook_12();
+void MassageBook_13();
 
+void MassageMem_1();
+void MassageMem_2();
+void MassageMem_3();
+void MassageMem_4();
+void MassageMem_5();
+void MassageMem_6();
+void MassageMem_7();
+void MassageMem_8();
+void MassageMem_9();
 
+void MassageFile_1();
+void MassageFile_2();
+void MassageFile_3();
 
 
 

@@ -16,12 +16,10 @@ void Filename(int tab, string filename) {
 	SetConsoleCursorPosition(2, 41);
 	cout << "New file name ->"<<filename<<"\t\t\t\t\t\n";// close file
 	return;
-	
 }
+
 //////////////////////////////////////////////Read file
 void ReadMyFile(int tab, string filename) {
-	//const char * file = "Book.dat";
-	//const char * file1 = "User.dat";
 	int str = 1;
 	string file = filename;
 	int x = 0;
@@ -29,13 +27,6 @@ void ReadMyFile(int tab, string filename) {
 	Book book;
 	User user;
 	int nrow = 0;
-	
-	
-
-	//for (int i = 5; i < 35; i++) {
-	//	SetConsoleCursorPosition(1, i);
-	//	cout <<  setfill(' ') << setw(45) << " " << endl;	 }
-
 
 	if (tab == 0) {
 		ifstream fin;
@@ -57,9 +48,6 @@ void ReadMyFile(int tab, string filename) {
 				y++;
 			} nrow = 0;
 			 fin.close();
-			 
-			
-			
 		}
 	}
 	else {
@@ -85,9 +73,9 @@ void ReadMyFile(int tab, string filename) {
 		}
 	}
 }
+
 /////////////////////////////////////////////Add new book or user
 void Add(int tab, string filename) {																	//add user or book
-																										//const char * file = "Book.dat";
 																										//const char * file1 = "User.dat";
 	string file = filename;
 	Book book;
@@ -108,17 +96,12 @@ void Add(int tab, string filename) {																	//add user or book
 			/*exit(EXIT_FAILURE);*/
 			return;
 		}
-
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter book name (enter a blank line to quit):\t\t\t\t\t\n";
-		ClearRow();
+		MassageBook_1();
 		cin.get(book.B_name, 110);
 
 		while (strlen(book.B_name) > 100)
 		{
-			SetConsoleCursorPosition(2, 41);
-			cout << "Enter book name (max - 100):\t\t\t\t\t\n";
-			ClearRow();
+			MassageBook_2();
 			cin.clear(0);
 			cin.ignore(cin.rdbuf()->in_avail());
 			cin.get(book.B_name, 110);
@@ -134,18 +117,14 @@ void Add(int tab, string filename) {																	//add user or book
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Author Name ->Format Name Surname Patronymic:\t\t\t\t\t\n";
-		ClearRow();
+		MassageBook_3();
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());
 		cin.get(book.Aut, 110);
 
 		while (strlen(book.Aut) > 100)
 		{
-			SetConsoleCursorPosition(2, 41);
-			cout << "Enter Author Name ->(max - 33):\t\t\t\t\t\n";
-			ClearRow();
+			MassageBook_4();
 			cin.clear(0);
 			cin.ignore(cin.rdbuf()->in_avail());
 			cin.get(book.Aut, 110);
@@ -157,16 +136,13 @@ void Add(int tab, string filename) {																	//add user or book
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Release date ->Format dd.mm.yyyy:\t\t\t\t\t\n";
-		ClearRow();
+		MassageBook_5();
 		cin.get(book.R_date, 15);
 									
 		while(strlen(book.R_date)>10)		//chek leng
 		{SetConsoleCursorPosition(2, 41);
-		cout << "Enter Release date ->Format dd.mm.yyyy:\t\t\t\t\t\n";
-		ClearRow();
-		cin.clear(0);
+
+		MassageBook_5();
 		cin.ignore(cin.rdbuf()->in_avail());
 		cin.get(book.R_date, 15);	}				 //temp
 
@@ -176,16 +152,12 @@ void Add(int tab, string filename) {																	//add user or book
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 
-		
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Book context:\t\t\t\t\t\n";
-		ClearRow();
+		MassageBook_6();
 		cin.get(book.Con, 35);
 
 		while (strlen(book.Con) > 30) {
-			SetConsoleCursorPosition(2, 41);
-			cout << "Erorr!Enter Book context->(max - 30):\t\t\t\t\t\n";
-			ClearRow();
+
+			MassageBook_7();
 			cin.clear(0);
 			cin.ignore(cin.rdbuf()->in_avail());
 			cin.get(book.Con, 35);
@@ -198,18 +170,13 @@ void Add(int tab, string filename) {																	//add user or book
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 
-
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Book count:\t\t\t\t\t\n";
-		ClearRow();
+		MassageBook_8();
 		cin.getline(buf, 8);
 		temp = atoi(buf);
 
 		while (1>temp || temp>11 || !atoi(buf))
 		{
-			SetConsoleCursorPosition(2, 41);
-			cout << "Erorr! Enter an integer between 1 and 10, inclusive:\t\t\t\n";
-			ClearRow();
+			MassageBook_9();
 			cin.getline(buf, 5);
 			temp = atoi(buf);
 
@@ -221,18 +188,13 @@ void Add(int tab, string filename) {																	//add user or book
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Book rate:\t\t\t\t\t\n";
-		ClearRow();
+		MassageBook_10();
 		cin.getline(buf, 8);
 		temp = atoi(buf);
 
 		while (0>temp || temp>5 || !atoi(buf))
 		{
-
-			SetConsoleCursorPosition(2, 41);
-			cout << "Erorr! Enter an integer between 0 and 5, inclusive.\t\t\t\n";
-			ClearRow();
+			MassageBook_11();
 			cin.getline(buf, 5);
 			temp = atoi(buf);
 
@@ -243,18 +205,13 @@ void Add(int tab, string filename) {																	//add user or book
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Book ID:\t\t\t\t\t\n";
-		ClearRow();
+		MassageBook_12();
 		cin.getline(buf,10);
 		temp = atoi(buf);
 
 		while (0>temp || temp>9999 || !atoi(buf))
 		{
-
-			SetConsoleCursorPosition(2, 41);
-			cout << "Erorr! Enter an integer between 0 and 9999, inclusive.\t\t\t\n";
-			ClearRow();
+			MassageBook_13();
 			cin.getline(buf, 10);
 			temp = atoi(buf);
 
@@ -285,17 +242,12 @@ void Add(int tab, string filename) {																	//add user or book
 			//exit(EXIT_FAILURE);
 			return;
 		}
-
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Member name (enter a blank line to quit):\t\t\t\t\t\n";
-		ClearRow();
+		MassageMem_1();
 		cin.get(user.U_Name, 110);
 
 		while (strlen(user.U_Name) > 100)
 		{
-			SetConsoleCursorPosition(2, 41);
-			cout << "Enter book name (max - 100):\t\t\t\t\t\n";
-			ClearRow();
+			MassageMem_5();
 			cin.clear(0);
 			cin.ignore(cin.rdbuf()->in_avail());
 			cin.get(user.U_Name, 110);
@@ -312,9 +264,7 @@ void Add(int tab, string filename) {																	//add user or book
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter birthday user  format (enter a blank line to quit):\t\t\t\n";
-		ClearRow();
+		MassageMem_2();
 		cin.get(user.Hbir, 11);
 		if (user.Hbir[0] != '\0')
 			eatline();
@@ -322,9 +272,7 @@ void Add(int tab, string filename) {																	//add user or book
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());
 
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Date of issue  format dd.mm.yyyy (enter a blank line to quit):\t\t\t\n";
-		ClearRow();
+		MassageMem_3();
 		cin.get(user.DateIs, 11);
 		if (user.DateIs[0] != '\0')
 			eatline();
@@ -332,9 +280,7 @@ void Add(int tab, string filename) {																	//add user or book
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());
 
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter ID-user format 0000 (enter a blank line to quit):\t\t\t\n";
-		ClearRow();
+		MassageMem_4();
 		cin.get(user.ID_vs_ID, 5);
 		if (user.ID_vs_ID[0] != '\0')
 			eatline();
@@ -366,8 +312,7 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 
 	fstream finout;     // read and write streams
 	finout.open(filename,
-		ios_base::in | ios_base::out | ios_base::binary);
-	//NOTE: Some Unix systems require omitting | ios::binary
+		ios_base::in | ios_base::out | ios_base::binary);		//NOTE: Some Unix systems require omitting | ios::binary
 
 	if (finout.is_open()) {
 		finout.seekg(0);    // go to beginning
@@ -401,10 +346,7 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 		return;
 	}
 
-
-	SetConsoleCursorPosition(2, 41);
-	cout << "Enter the record number you wish to change: \t\t\t\t\t\t\n";
-	ClearRow();
+	MassageFile_1();
 	cin.clear(0);
 	cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 	cin >> rec;
@@ -423,9 +365,8 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 		streampos place = rec * sizeof book;
 		finout.seekg(place);
 		finout.read((char *)&book, sizeof book);
-		SetConsoleCursorPosition(2, 41);
-		cout << "Your selection:\t\t\t\t\t\t\n";
-		ClearRow();
+
+		MassageFile_3();
 														  //readfile
 		cout << rec << ": " << setw(20) << book.B_name << ": "
 			<< setprecision(0) << setw(12) << book.Aut
@@ -437,9 +378,9 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter book name (enter a blank line to quit):\t\t\t\t\t\n";
-		ClearRow();
+		MassageBook_1();
+
+
 		cin.get(book.B_name, 30);
 		if (book.B_name[0] != '\0')
 			eatline();
@@ -452,9 +393,7 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Author Name ->Format Name Surname Patronymic:\t\t\t\t\t\n";
-		ClearRow();
+		MassageBook_3();
 		cin.get(book.Aut, 100);
 		if (book.Aut[0] != '\0')
 			eatline();
@@ -462,19 +401,15 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Release date ->Format dd.mm.yyyy:\t\t\t\t\t\n";
-		ClearRow();
+		MassageBook_5();
 		cin.get(book.R_date, 11);
 		if (book.R_date[0] != '\0')
 			eatline();
 
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
-
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Book context:\t\t\t\t\t\n";
-		ClearRow();
+		
+		MassageBook_6();
 		cin.get(book.Con, 30);
 		if (book.Con[0] != '\0')
 			eatline();
@@ -482,18 +417,13 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 
-
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Book count:\t\t\t\t\t\n";
-		ClearRow();
+		MassageBook_8();
 		cin.getline(buf, 8);
 		temp = atoi(buf);
 
 		while (1 > temp || temp > 11 || !atoi(buf)) {
 
-			SetConsoleCursorPosition(2, 41);
-			cout << "Erorr! Enter an integer between 1 and 10, inclusive:\t\t\t\n";
-			ClearRow();
+			MassageBook_9();
 			cin.getline(buf, 5);
 			temp = atoi(buf);
 
@@ -505,16 +435,12 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Book rate:\t\t\t\t\t\n";
-		ClearRow();
+		MassageBook_10();
 		cin.getline(buf, 8);
 		temp = atoi(buf);
 
 		while (0 > temp || temp > 11||!atoi(buf)) {
-			SetConsoleCursorPosition(2, 41);
-			cout << "Erorr! Enter an integer between 0 and 5, inclusive.\t\t\t\n";
-			ClearRow();
+			MassageBook_11();
 			cin.getline(buf, 5);
 			temp = atoi(buf);
 		}
@@ -525,9 +451,7 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Book ID:\t\t\t\t\t\n";
-		ClearRow();
+		MassageBook_12();
 		cin >> book.ID_b;
 		eatline();
 
@@ -574,13 +498,7 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 			return;
 		}
 
-		///////////////////temp
-
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Member name (enter a blank line to quit):\t\t\t\t\t\n";
-		ClearRow();	
-
-
+		MassageMem_1();
 		cin.get(user.U_Name, 30);
 		if (user.U_Name[0] != '\0')
 			eatline();
@@ -594,8 +512,8 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 		SetConsoleCursorPosition(2, 41);
-		cout << "Enter birthday user  format (enter a blank line to quit):\t\t\t\n";
-		ClearRow();
+
+		MassageMem_2();
 		cin.get(user.Hbir, 11);
 		if (user.Hbir[0] != '\0')
 			eatline();
@@ -603,9 +521,7 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());
 
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Date of issue  format dd.mm.yyyy (enter a blank line to quit):\t\t\t\n";
-		ClearRow();
+		MassageMem_3();
 		cin.get(user.DateIs, 11);
 		if (user.DateIs[0] != '\0')
 			eatline();
@@ -613,9 +529,7 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());
 
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter ID-user format 0000 (enter a blank line to quit):\t\t\t\n";
-		ClearRow();
+		MassageMem_4();
 		cin.get(user.ID_vs_ID, 5);
 		if (user.ID_vs_ID[0] != '\0')
 			eatline();
@@ -624,18 +538,13 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 		cin.ignore(cin.rdbuf()->in_avail());
 
 
-
-		SetConsoleCursorPosition(2, 41);
-		cout << "Enter Passport 0000:\t\t\t\t\t\n";
-		ClearRow();
+		MassageMem_7();
 		cin.getline(buf, 8);
 		temp = atoi(buf);
 
 		while (1 > temp || temp > 9999 || !atoi(buf)) {
 
-			SetConsoleCursorPosition(2, 41);
-			cout << "Erorr! Enter format 0000 (enter a blank line to quit):\t\t\t\n";
-			ClearRow();
+			MassageMem_8();
 			cin.getline(buf, 5);
 			temp = atoi(buf);
 
@@ -673,9 +582,7 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 	cin.clear(0);
 	cin.ignore(cin.rdbuf()->in_avail());
 
-	SetConsoleCursorPosition(2, 41);
-	cout << "Edite Done.\t\t\t\t\t\t\n";
-	ClearRow();
+	MassageMem_9();
 
 	
 }
@@ -701,7 +608,7 @@ void ReadMyFule(int tab, string filename) {
 			while (fin.read((char *)&book, sizeof book)) {
 				
 				cout << setiosflags(ios::left);					//viravnivanie
-				cout << char(186) << nrow++ << ":" << setw(20) << book.B_name;
+				cout << char(186) << setw(3) << nrow++ << ":" << setw(20) << book.B_name;
 				cout << '|' <<setw(20) << book.Aut ;
 				cout << '|' << setw(10) << book.R_date;
 				cout << '|' << setw(20) << book.Con ;
@@ -725,7 +632,7 @@ void ReadMyFule(int tab, string filename) {
 
 				SetConsoleCursorPosition(0,5);
 				cout << setiosflags(ios::left);
-				cout << char(186) << nrow++ << ":" << setw(20) << user.U_Name;
+				cout << char(186) << setw(3) << nrow++ << ":" << setw(20) << user.U_Name;
 				cout << '|' << setw(11) << user.Hbir ;
 				cout << '|' << setw(11) << user.DateIs;
 				cout << '|' << setw(20) << user.ID_vs_ID << endl;
@@ -735,7 +642,6 @@ void ReadMyFule(int tab, string filename) {
 		}
 	}
 }
-
 
 void EditID(int tab, string filename) {
 	string file = filename;
@@ -764,6 +670,67 @@ void EditID(int tab, string filename) {
 		else {
 			while (finout.read((char *)&user, sizeof user))
 				ct++;
+		}
+		if (finout.eof())
+			finout.clear(); // clear eof flag
+		else {
+			SetConsoleCursorPosition(2, 41);
+			cerr << "Error in reading " << filename << ".\t\t\t\t\t\t\n";
+			ClearRow();
+			return;
+		}
+	}
+	else
+	{
+		SetConsoleCursorPosition(2, 41);
+		cerr << filename << " could not be opened -- bye.\t\t\t\t\t\t\n";
+		ClearRow();
+		return;
+	}
+	MassageFile_1();
+	cin.clear(0);
+	cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
+	cin >> rec;
+
+	cin.clear(0);
+	cin.ignore(cin.rdbuf()->in_avail());
+
+	//eatline();                                      // get rid of newline		
+
+
+	if (rec < 0 || rec >= ct) {
+
+		SetConsoleCursorPosition(2, 41);
+		cerr << "Invalid record number \t\t\t\t\t\t\n";
+		ClearRow();
+		return;
+	}	
+	streampos place; 
+	streampos place1;
+	if (tab == 0) {	   // convert to streampos type
+		streampos place = ct * sizeof book;
+		finout.seekg(place);
+		finout.read((char *)&book, sizeof book);
+
+
+		if (finout.eof())
+			finout.clear();
+		
+		streampos place1 = rec * sizeof book;				  //change delete row with last
+				finout.seekp(place1);    // go back
+				finout.write((char *)&book, sizeof book)<< flush;
+
+
+		if (finout.eof())
+			finout.clear();
+
+
+
+		if (finout.fail()) {
+			SetConsoleCursorPosition(2, 41);
+			cerr << "Error on attempted write\t\t\t\t\t\t\n";
+			ClearRow();
+			return;
 		}
 	}
 }

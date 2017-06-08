@@ -114,6 +114,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="TextMasage.cpp" />
     <ClCompile Include="View.cpp" />
     <ClCompile Include="IOFunc.cpp" />
     <ClCompile Include="main.cpp" />
