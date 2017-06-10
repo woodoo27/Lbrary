@@ -91,20 +91,16 @@ int main(){
 				case 'S': {	
 					if (tab == 0) {
 						Del(tab, st_book);
-						cin.clear(0);
-						cin.ignore(cin.rdbuf()->in_avail());
 						CopyFile_my(tab, st_book);
-						cin.clear(0);
-						cin.ignore(cin.rdbuf()->in_avail());
+						for (int i = 5; i < 40; i++)
+							FullClearRowPanel(i, fullmode);
 						ReadMyFile(tab, st_book);
 					}
 					else {
 						Del(tab, st_user);
-						cin.clear(0);
-						cin.ignore(cin.rdbuf()->in_avail());
 						CopyFile_my(tab, st_user);
-						cin.clear(0);
-						cin.ignore(cin.rdbuf()->in_avail());
+						for (int i = 5; i < 40; i++)
+							FullClearRowPanel(i, fullmode);
 						ReadMyFile(tab, st_user);
 					}
 				} 
@@ -124,7 +120,7 @@ int main(){
 					ClearRow();	
 					if (fullmode == 1) {
 						for (int i = 5; i < 40; i++)
-						FullClearRowPanel(i, fullmode);	  
+							FullClearRowPanel(i, fullmode);	  
 						FullClearRow(41);
 
 						if (tab == 0)
@@ -219,6 +215,9 @@ int main(){
 				//ReadMyFile(0);
 				//SetConsoleCursorPosition(2, 42);
 				ClearRow();
+				cin.clear(0);
+				cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
+
 				
 			}	
 		}
