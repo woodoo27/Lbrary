@@ -40,7 +40,7 @@ void RandomLineEdit(int tab, string filename);
 void EditID(int tab, string filename);	  //temp
 
 void Del(int tab, string filename);
-
+void CopyFile_my(int tab, string filename);
 /////////////////////////////////////////////////func menu & button
 void showmenu();
 void showmenuBook();

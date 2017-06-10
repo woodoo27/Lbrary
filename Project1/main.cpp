@@ -89,7 +89,9 @@ int main(){
 				}						   
 				case 's':;
 				case 'S': {	  Del(tab, st_book);
-					//EditID(tab, st_book);
+					cin.clear(0);
+					cin.ignore(cin.rdbuf()->in_avail());
+					CopyFile_my(tab, st_book);
 					ReadMyFile(tab, st_book);
 				} 
 					ClearRow();

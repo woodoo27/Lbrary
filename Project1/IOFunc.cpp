@@ -762,19 +762,14 @@ void Del(int tab, string filename) {				 ////////////////????????????????????
 	finout_temp.open(ftemp,
 		ios_base::in | ios_base::out | ios_base::binary);
 	
-	filebuf* inbuf = finout.rdbuf();
-	filebuf* outbuf = finout_temp.rdbuf();
 	
 	MassageFile_4();
 	cin >> rec;
 
-	streampos place = ct * sizeof book;
-	streampos place1 = rec * sizeof book;
-
 
 	if (finout.is_open()) {
 		
-
+																		//dobavinm obrabotku finout_temp.is_open!!!!!!!
 		if (tab == 0) {												//rabotaet
 			while (finout.read((char *)&book, sizeof book)) {
 				
@@ -790,8 +785,17 @@ void Del(int tab, string filename) {				 ////////////////????????????????????
 		}
 
 		else {
-			while (finout.read((char *)&user, sizeof user))
+			while (finout.read((char *)&user, sizeof user)) {
+
+				if (ct != rec) {
+					finout_temp.write((char *)&user, sizeof user);
+					finout.clear();
+					finout_temp.clear();
+				}
+				else
+					ct++;
 				ct++;
+			}
 		}															//vnutr finout_temp.is_open()
 		if (finout.eof())
 			finout.clear(); // clear eof flag
@@ -809,8 +813,12 @@ void Del(int tab, string filename) {				 ////////////////????????????????????
 		ClearRow();
 		return;
 	}
-	
 
+	finout.clear();
+	finout.close();
+	finout_temp.clear();
+	finout_temp.close();
+	//CopyFile_my(tab,filename);
 	  	//NOTE: some systems don't accept the ios::binary mode
 
 	
@@ -887,6 +895,76 @@ void Del(int tab, string filename) {				 ////////////////????????????????????
 //
 //return 0;
  ////////////////////////end bufer
+
+
+
+void CopyFile_my(int tab, string filename) {
+	string file = filename;
+	string ftemp = "temp_file";
+	Book book;
+	User user;
+	int ct = 0;
+	long rec;
+	streampos place;
+
+	fstream finout;     // read and write streams
+	finout.open(filename,
+		ios_base::in | ios_base::out | ios_base::trunc | ios_base::binary);	//NOTE: Some Unix systems require omitting | ios::binary
+
+	fstream finout_temp;
+	finout_temp.open(ftemp,
+		ios_base::in | ios_base::out | ios_base::binary);
+
+	if (finout.is_open()) {															//vnutr finout_temp.is_open()
+
+
+		if (tab == 0) {												//rabotaet	   
+			while (finout_temp.read((char *)&book, sizeof book)) {
+
+				
+					finout.write((char *)&book, sizeof book);
+					finout.clear();
+					finout_temp.clear();
+				
+			}
+		}
+
+		else {
+			while (finout_temp.read((char *)&user, sizeof user)) {
+
+				
+					finout.write((char *)&user, sizeof user);
+					finout.clear();
+					finout_temp.clear();
+				
+			}
+		}
+		finout.eof();
+		if (finout.eof())											 ///????????????????????????
+			finout.clear(); // clear eof flag
+		else {
+			SetConsoleCursorPosition(2, 41);
+			cerr << "Error in reading copy " << filename << ".\t\t\t\t\t\t\n";
+			ClearRow();
+			return;
+		}
+	}
+	else
+	{
+		SetConsoleCursorPosition(2, 41);
+		cerr << filename << "copy could not be opened -- bye.\t\t\t\t\t\t\n";
+		ClearRow();
+		return;
+	}
+
+	finout.clear();
+	finout.close();
+	finout_temp.clear();
+	finout_temp.close();
+
+
+
+}
 
 
 
