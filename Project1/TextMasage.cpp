@@ -153,7 +153,13 @@ void MassageFile_3() {
 	cout << "Your selection:\t\t\t\t\t\t\n";
 	ClearRow();
 }
-//void MassageFile_1() { }
-//void MassageFile_1() { }
+void MassageFile_4() {
+	SetConsoleCursorPosition(2, 41);
+	cout << "Enter the record number you wish to delete: \t\t\t\t\t\t\n";
+	ClearRow();
+}
+void MassageFile_5() {SetConsoleCursorPosition(2, 41);
+cerr << "Invalid record number \t\t\t\t\t\t\n";
+ClearRow(); }
 //void MassageFile_1() { }
 //void MassageFile_1() { }

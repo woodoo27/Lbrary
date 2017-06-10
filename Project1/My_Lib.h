@@ -37,7 +37,9 @@ void Filename(int tab, string filename);
 
 void RandomLineEdit(int tab, string filename);
 
-void EditID(int tab, string filename);
+void EditID(int tab, string filename);	  //temp
+
+void Del(int tab, string filename);
 
 /////////////////////////////////////////////////func menu & button
 void showmenu();
@@ -86,8 +88,8 @@ void MassageMem_9();
 void MassageFile_1();
 void MassageFile_2();
 void MassageFile_3();
-
-
+void MassageFile_4();
+void MassageFile_5();
 
 
 

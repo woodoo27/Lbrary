@@ -88,8 +88,8 @@ int main(){
 					break;
 				}						   
 				case 's':;
-				case 'S': {	 
-					EditID(tab, st_book);
+				case 'S': {	  Del(tab, st_book);
+					//EditID(tab, st_book);
 					ReadMyFile(tab, st_book);
 				} 
 					ClearRow();

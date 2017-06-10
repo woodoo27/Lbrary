@@ -1,5 +1,5 @@
 #include <iostream>
-#include  <fstream>
+#include <fstream>
 #include <iomanip>
 #include <Windows.h>
 #include <string>
@@ -8,13 +8,14 @@
 #include "My_Lib.h"
 
 
-
 //////////////////////////////////////////////Create new file
 void Filename(int tab, string filename) {				
 	ofstream fout(filename.c_str());  // create output stream object for new file and call it fout
 	fout.close();
 	SetConsoleCursorPosition(2, 41);
 	cout << "New file name ->"<<filename<<"\t\t\t\t\t\n";// close file
+	fout.clear();
+	fout.close();
 	return;
 }
 
@@ -651,11 +652,11 @@ void EditID(int tab, string filename) {
 	int ct = 0;
 	long rec;
 	int temp;
+	streambuf *bak;
 
 	fstream finout;     // read and write streams
 	finout.open(filename,
-		ios_base::in | ios_base::out | ios_base::binary);
-	//NOTE: Some Unix systems require omitting | ios::binary
+		ios_base::in | ios_base::out | ios_base::binary);	//NOTE: Some Unix systems require omitting | ios::binary
 
 	if (finout.is_open()) {
 		finout.seekg(0);    // go to beginning
@@ -664,6 +665,9 @@ void EditID(int tab, string filename) {
 
 		if (tab == 0) {
 			while (finout.read((char *)&book, sizeof book))
+
+
+
 				ct++;
 		}
 
@@ -687,27 +691,24 @@ void EditID(int tab, string filename) {
 		ClearRow();
 		return;
 	}
-	MassageFile_1();
-	cin.clear(0);
-	cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
+	MassageFile_4();
 	cin >> rec;
 
 	cin.clear(0);
 	cin.ignore(cin.rdbuf()->in_avail());
 
-	//eatline();                                      // get rid of newline		
 
 
 	if (rec < 0 || rec >= ct) {
 
-		SetConsoleCursorPosition(2, 41);
-		cerr << "Invalid record number \t\t\t\t\t\t\n";
-		ClearRow();
+		MassageFile_5();
 		return;
 	}	
 	streampos place; 
 	streampos place1;
 	if (tab == 0) {	   // convert to streampos type
+
+
 		streampos place = ct * sizeof book;
 		finout.seekg(place);
 		finout.read((char *)&book, sizeof book);
@@ -715,16 +716,18 @@ void EditID(int tab, string filename) {
 
 		if (finout.eof())
 			finout.clear();
-		
+		//
 		streampos place1 = rec * sizeof book;				  //change delete row with last
 				finout.seekp(place1);    // go back
 				finout.write((char *)&book, sizeof book)<< flush;
-
+		
+				place1 = ct;
+				finout.seekp(place1);    // go back
+				finout.put(EOF) ;
 
 		if (finout.eof())
 			finout.clear();
-
-
+			 finout.close();
 
 		if (finout.fail()) {
 			SetConsoleCursorPosition(2, 41);
@@ -733,8 +736,157 @@ void EditID(int tab, string filename) {
 			return;
 		}
 	}
+	else {												//for user
+	}
+	
 }
 
+
+void Del(int tab, string filename) {				 ////////////////????????????????????
+	string file = filename;
+	string ftemp = "temp_file";
+	Book book;
+	User user;
+	char buf[16];
+	int ct = 0;
+	long rec;
+	int temp;
+	streambuf *bak;
+
+	Filename(tab, ftemp);
+	fstream finout;     // read and write streams
+	finout.open(filename,
+		ios_base::in | ios_base::out | ios_base::binary);	//NOTE: Some Unix systems require omitting | ios::binary
+
+	fstream finout_temp;
+	finout_temp.open(ftemp,
+		ios_base::in | ios_base::out | ios_base::binary);
+	
+	filebuf* inbuf = finout.rdbuf();
+	filebuf* outbuf = finout_temp.rdbuf();
+	
+	MassageFile_4();
+	cin >> rec;
+
+	streampos place = ct * sizeof book;
+	streampos place1 = rec * sizeof book;
+
+
+	if (finout.is_open()) {
+		
+
+		if (tab == 0) {												//rabotaet
+			while (finout.read((char *)&book, sizeof book)) {
+				
+				if (ct != rec) {
+					finout_temp.write((char *)&book, sizeof book);
+				finout.clear();
+				finout_temp.clear();
+			}
+				else
+					ct++; 
+				ct++;
+			}
+		}
+
+		else {
+			while (finout.read((char *)&user, sizeof user))
+				ct++;
+		}															//vnutr finout_temp.is_open()
+		if (finout.eof())
+			finout.clear(); // clear eof flag
+		else {
+			SetConsoleCursorPosition(2, 41);
+			cerr << "Error in reading " << filename << ".\t\t\t\t\t\t\n";
+			ClearRow();
+			return;
+		}
+	}
+	else
+	{
+		SetConsoleCursorPosition(2, 41);
+		cerr << filename << " could not be opened -- bye.\t\t\t\t\t\t\n";
+		ClearRow();
+		return;
+	}
+	
+
+	  	//NOTE: some systems don't accept the ios::binary mode
+
+	
+
+
+	//if (finout_temp.is_open())
+	//{
+
+	//	if (tab == 0) {
+
+	//		// convert to streampos type
+
+
+	//		
+	//		finout.seekg(place);
+	//		finout.read((char *)&book, sizeof book);
+
+
+	//		if (finout.eof())
+	//			finout.clear();
+	//		//
+	//						  //change delete row with last
+	//		finout.seekp(place1);    // go back
+	//		finout_temp.write((char *)&book, sizeof book) << flush;
+
+	//		place1 = ct;
+	//		finout.seekp(place1);    // go back
+	//		finout_temp.put(EOF);
+
+	//		if (finout.eof())
+	//			finout.clear();
+	//		finout.close();
+
+	//		if (finout.fail()) {
+	//			SetConsoleCursorPosition(2, 41);
+	//			cerr << "Error on attempted write\t\t\t\t\t\t\n";
+	//			ClearRow();
+	//			return;
+	//		}
+	//	}
+	//}
+	//else
+	//{
+	//	SetConsoleCursorPosition(2, 41);
+	//	cerr << ftemp << " could not be opened -- bye.\t\t\t\t\t\t\n";
+	//	ClearRow();
+	//	return;
+	//}
+	//finout_temp.close;
+	//finout.close;
+}
+
+
+
+
+
+/////////////////////  bufer
+//std::fstream src,dest;
+//src.open("test.txt");
+//dest.open("copy.txt");
+//
+//std::filebuf* inbuf = src.rdbuf();
+//std::filebuf* outbuf = dest.rdbuf();
+//
+//char c = inbuf->sbumpc();
+//while (c != EOF)
+//{
+//	outbuf->sputc(c);
+//	c = inbuf->sbumpc();
+//}
+//
+//dest.close();
+//src.close();
+//
+//return 0;
+ ////////////////////////end bufer
 
 
 
