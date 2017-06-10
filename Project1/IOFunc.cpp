@@ -9,11 +9,11 @@
 
 
 //////////////////////////////////////////////Create new file
-void Filename(int tab, string filename) {				
+void Filename(int tab, string filename) {
 	ofstream fout(filename.c_str());  // create output stream object for new file and call it fout
 	fout.close();
 	SetConsoleCursorPosition(2, 41);
-	cout << "New file name ->"<<filename<<"\t\t\t\t\t\n";// close file
+	cout << "New file name ->" << filename << "\t\t\t\t\t\n";// close file
 	fout.clear();
 	fout.close();
 	return;
@@ -40,15 +40,15 @@ void ReadMyFile(int tab, string filename) {
 			y = 5;
 			SetConsoleCursorPosition(0, 5);
 			while (fin.read((char *)&book, sizeof book)) {
-			 	 
+
 				cout << setiosflags(ios::left);					//viravnivanie
-				cout << char(186)<<nrow++<<":" << setw(20) << book.B_name;
-				cout << '|'  << setw(5) << book.ID_b;
-				cout << '|'  << setw(3) << book.Cou << endl;
+				cout << char(186) << nrow++ << ":" << setw(20) << book.B_name;
+				cout << '|' << setw(5) << book.ID_b;
+				cout << '|' << setw(3) << book.Cou << endl;
 				str++;
 				y++;
 			} nrow = 0;
-			 fin.close();
+			fin.close();
 		}
 	}
 	else {
@@ -65,7 +65,7 @@ void ReadMyFile(int tab, string filename) {
 
 				SetConsoleCursorPosition(51, i);
 				cout << setiosflags(ios::left);
-				cout << nrow++ << ":" <<setw(15) << user.U_Name << '|' << setw(10) << user.Hbir << endl;
+				cout << nrow++ << ":" << setw(15) << user.U_Name << '|' << setw(10) << user.Hbir << endl;
 				//cout << '|' << setw(11) << user.DateIs;
 				//cout << '|' << setw(11) << user.Pas << endl;
 				i++;
@@ -139,13 +139,15 @@ void Add(int tab, string filename) {																	//add user or book
 
 		MassageBook_5();
 		cin.get(book.R_date, 15);
-									
-		while(strlen(book.R_date)>10)		//chek leng
-		{SetConsoleCursorPosition(2, 41);
 
-		MassageBook_5();
-		cin.ignore(cin.rdbuf()->in_avail());
-		cin.get(book.R_date, 15);	}				 //temp
+		while (strlen(book.R_date)>10)		//chek leng
+		{
+			SetConsoleCursorPosition(2, 41);
+
+			MassageBook_5();
+			cin.ignore(cin.rdbuf()->in_avail());
+			cin.get(book.R_date, 15);
+		}				 //temp
 
 		if (book.R_date[0] != '\0')
 			eatline();
@@ -207,7 +209,7 @@ void Add(int tab, string filename) {																	//add user or book
 		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
 
 		MassageBook_12();
-		cin.getline(buf,10);
+		cin.getline(buf, 10);
 		temp = atoi(buf);
 
 		while (0>temp || temp>9999 || !atoi(buf))
@@ -216,7 +218,7 @@ void Add(int tab, string filename) {																	//add user or book
 			cin.getline(buf, 10);
 			temp = atoi(buf);
 
-		} 
+		}
 		book.ID_b = temp;
 		eatline();
 
@@ -324,7 +326,7 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 			while (finout.read((char *)&book, sizeof book))
 				ct++;
 		}
-		
+
 		else {
 			while (finout.read((char *)&user, sizeof user))
 				ct++;
@@ -356,7 +358,7 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 
 
 	if (rec < 0 || rec >= ct) {
-		
+
 		SetConsoleCursorPosition(2, 41);
 		cerr << "Invalid record number \t\t\t\t\t\t\n";
 		ClearRow();
@@ -368,7 +370,7 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 		finout.read((char *)&book, sizeof book);
 
 		MassageFile_3();
-														  //readfile
+		//readfile
 		cout << rec << ": " << setw(20) << book.B_name << ": "
 			<< setprecision(0) << setw(12) << book.Aut
 			<< setprecision(2) << setw(6) << book.Con << endl;
@@ -409,7 +411,7 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 
 		cin.clear(0);
 		cin.ignore(cin.rdbuf()->in_avail());			 //clear stream
-		
+
 		MassageBook_6();
 		cin.get(book.Con, 30);
 		if (book.Con[0] != '\0')
@@ -440,7 +442,7 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 		cin.getline(buf, 8);
 		temp = atoi(buf);
 
-		while (0 > temp || temp > 11||!atoi(buf)) {
+		while (0 > temp || temp > 11 || !atoi(buf)) {
 			MassageBook_11();
 			cin.getline(buf, 5);
 			temp = atoi(buf);
@@ -565,12 +567,12 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 		cout << setiosflags(ios::left);
 		SetConsoleCursorPosition(0, 5);
 		cout << setiosflags(ios::left);
-		cout << char(186)  << setw(20) << user.U_Name;
+		cout << char(186) << setw(20) << user.U_Name;
 		cout << '|' << setw(11) << user.Hbir;
 		cout << '|' << setw(11) << user.DateIs;
 		cout << '|' << setw(20) << user.ID_vs_ID << endl;
 		cout << '|' << setw(20) << user.Pas << endl;
-		cout  << setw(13) <<  char(186) << endl;
+		cout << setw(13) << char(186) << endl;
 
 		if (finout.fail()) {
 			SetConsoleCursorPosition(2, 41);
@@ -585,7 +587,7 @@ void RandomLineEdit(int tab, string filename) {								  //not work user block
 
 	MassageMem_9();
 
-	
+
 }
 
 void ReadMyFule(int tab, string filename) {
@@ -604,15 +606,15 @@ void ReadMyFule(int tab, string filename) {
 			SetConsoleCursorPosition(10, 3);
 			cout << setw(30) << file << " - open";
 
-			
+
 			SetConsoleCursorPosition(0, 5);
 			while (fin.read((char *)&book, sizeof book)) {
-				
+
 				cout << setiosflags(ios::left);					//viravnivanie
 				cout << char(186) << setw(3) << nrow++ << ":" << setw(20) << book.B_name;
-				cout << '|' <<setw(20) << book.Aut ;
+				cout << '|' << setw(20) << book.Aut;
 				cout << '|' << setw(10) << book.R_date;
-				cout << '|' << setw(20) << book.Con ;
+				cout << '|' << setw(20) << book.Con;
 				cout << '|' << setw(2) << book.Rat;
 				cout << '|' << setw(5) << book.ID_b;
 				cout << '|' << setw(3) << book.Cou << endl;
@@ -631,10 +633,10 @@ void ReadMyFule(int tab, string filename) {
 			SetConsoleCursorPosition(0, 5);
 			while (fin.read((char *)&user, sizeof user)) {
 
-				SetConsoleCursorPosition(0,5);
+				SetConsoleCursorPosition(0, 5);
 				cout << setiosflags(ios::left);
 				cout << char(186) << setw(3) << nrow++ << ":" << setw(20) << user.U_Name;
-				cout << '|' << setw(11) << user.Hbir ;
+				cout << '|' << setw(11) << user.Hbir;
 				cout << '|' << setw(11) << user.DateIs;
 				cout << '|' << setw(20) << user.ID_vs_ID << endl;
 				cout << '|' << setw(20) << user.Pas << endl;
@@ -703,8 +705,8 @@ void EditID(int tab, string filename) {
 
 		MassageFile_5();
 		return;
-	}	
-	streampos place; 
+	}
+	streampos place;
 	streampos place1;
 	if (tab == 0) {	   // convert to streampos type
 
@@ -718,16 +720,16 @@ void EditID(int tab, string filename) {
 			finout.clear();
 		//
 		streampos place1 = rec * sizeof book;				  //change delete row with last
-				finout.seekp(place1);    // go back
-				finout.write((char *)&book, sizeof book)<< flush;
-		
-				place1 = ct;
-				finout.seekp(place1);    // go back
-				finout.put(EOF) ;
+		finout.seekp(place1);    // go back
+		finout.write((char *)&book, sizeof book) << flush;
+
+		place1 = ct;
+		finout.seekp(place1);    // go back
+		finout.put(EOF);
 
 		if (finout.eof())
 			finout.clear();
-			 finout.close();
+		finout.close();
 
 		if (finout.fail()) {
 			SetConsoleCursorPosition(2, 41);
@@ -738,7 +740,7 @@ void EditID(int tab, string filename) {
 	}
 	else {												//for user
 	}
-	
+
 }
 
 
@@ -761,25 +763,25 @@ void Del(int tab, string filename) {				 ////////////////????????????????????
 	fstream finout_temp;
 	finout_temp.open(ftemp,
 		ios_base::in | ios_base::out | ios_base::binary);
-	
-	
+
+
 	MassageFile_4();
 	cin >> rec;
 
 
 	if (finout.is_open()) {
-		
-																		//dobavinm obrabotku finout_temp.is_open!!!!!!!
+
+		//dobavinm obrabotku finout_temp.is_open!!!!!!!
 		if (tab == 0) {												//rabotaet
 			while (finout.read((char *)&book, sizeof book)) {
-				
+
 				if (ct != rec) {
 					finout_temp.write((char *)&book, sizeof book);
-				finout.clear();
-				finout_temp.clear();
-			}
+					finout.clear();
+					finout_temp.clear();
+				}
 				else
-					ct++; 
+					ct++;
 				ct++;
 			}
 		}
@@ -796,7 +798,8 @@ void Del(int tab, string filename) {				 ////////////////????????????????????
 					ct++;
 				ct++;
 			}
-		}															//vnutr finout_temp.is_open()
+		}
+		finout.eof();															//vnutr finout_temp.is_open()
 		if (finout.eof())
 			finout.clear(); // clear eof flag
 		else {
@@ -819,9 +822,9 @@ void Del(int tab, string filename) {				 ////////////////????????????????????
 	finout_temp.clear();
 	finout_temp.close();
 	//CopyFile_my(tab,filename);
-	  	//NOTE: some systems don't accept the ios::binary mode
+	//NOTE: some systems don't accept the ios::binary mode
 
-	
+
 
 
 	//if (finout_temp.is_open())
@@ -894,7 +897,7 @@ void Del(int tab, string filename) {				 ////////////////????????????????????
 //src.close();
 //
 //return 0;
- ////////////////////////end bufer
+////////////////////////end bufer
 
 
 
@@ -909,7 +912,7 @@ void CopyFile_my(int tab, string filename) {
 
 	fstream finout;     // read and write streams
 	finout.open(filename,
-		ios_base::in | ios_base::out | ios_base::trunc | ios_base::binary);	//NOTE: Some Unix systems require omitting | ios::binary
+		ios_base::in | ios_base::out |ios_base::trunc|ios_base::binary);	//NOTE: Some Unix systems require omitting | ios::binary
 
 	fstream finout_temp;
 	finout_temp.open(ftemp,
@@ -921,24 +924,30 @@ void CopyFile_my(int tab, string filename) {
 		if (tab == 0) {												//rabotaet	   
 			while (finout_temp.read((char *)&book, sizeof book)) {
 
-				
-					finout.write((char *)&book, sizeof book);
-					finout.clear();
-					finout_temp.clear();
-				
+
+				finout.write((char *)&book, sizeof book);
+				finout.clear();
+				finout_temp.clear();
+
 			}
 		}
 
 		else {
 			while (finout_temp.read((char *)&user, sizeof user)) {
 
-				
-					finout.write((char *)&user, sizeof user);
-					finout.clear();
-					finout_temp.clear();
-				
+
+				finout.write((char *)&user, sizeof user);
+				finout.clear();
+				finout_temp.clear();
+
 			}
 		}
+
+
+
+
+
+		finout_temp.eof();
 		finout.eof();
 		if (finout.eof())											 ///????????????????????????
 			finout.clear(); // clear eof flag
@@ -946,6 +955,7 @@ void CopyFile_my(int tab, string filename) {
 			SetConsoleCursorPosition(2, 41);
 			cerr << "Error in reading copy " << filename << ".\t\t\t\t\t\t\n";
 			ClearRow();
+
 			return;
 		}
 	}
@@ -962,11 +972,7 @@ void CopyFile_my(int tab, string filename) {
 	finout_temp.clear();
 	finout_temp.close();
 
-
+	cin.clear(0);
+	cin.ignore(cin.rdbuf()->in_avail());
 
 }
-
-
-
-
-

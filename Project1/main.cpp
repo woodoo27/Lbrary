@@ -88,12 +88,28 @@ int main(){
 					break;
 				}						   
 				case 's':;
-				case 'S': {	  Del(tab, st_book);
-					cin.clear(0);
-					cin.ignore(cin.rdbuf()->in_avail());
-					CopyFile_my(tab, st_book);
-					ReadMyFile(tab, st_book);
+				case 'S': {	
+					if (tab == 0) {
+						Del(tab, st_book);
+						cin.clear(0);
+						cin.ignore(cin.rdbuf()->in_avail());
+						CopyFile_my(tab, st_book);
+						cin.clear(0);
+						cin.ignore(cin.rdbuf()->in_avail());
+						ReadMyFile(tab, st_book);
+					}
+					else {
+						Del(tab, st_user);
+						cin.clear(0);
+						cin.ignore(cin.rdbuf()->in_avail());
+						CopyFile_my(tab, st_user);
+						cin.clear(0);
+						cin.ignore(cin.rdbuf()->in_avail());
+						ReadMyFile(tab, st_user);
+					}
 				} 
+						  cin.clear(0);
+						  cin.ignore(cin.rdbuf()->in_avail());
 					ClearRow();
 					break;
 				case 'q':;								  //work
